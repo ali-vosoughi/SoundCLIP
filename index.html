@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!-- 
+SoundCLIP Project Webpage
+Live at: https://ali-vosoughi.github.io/SoundCLIP/
+Paper: https://arxiv.org/abs/2506.10416
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -57,6 +62,19 @@
         .nav-links a:hover {
             color: #3498db;
             text-decoration: underline;
+        }
+
+        .paper-link {
+            background: #e74c3c;
+            color: white !important;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .paper-link:hover {
+            background: #c0392b;
+            text-decoration: none;
         }
 
         .title-section {
@@ -338,6 +356,61 @@
             font-size: 0.8rem;
         }
 
+        .sound-sources {
+            background: #e8f4f8;
+            border: 1px solid #b8d4da;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .sound-sources h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .source-description {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .source-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
+        }
+
+        .source-label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.9rem;
+            min-width: 140px;
+        }
+
+        .source-list {
+            color: #495057;
+            font-size: 0.9rem;
+        }
+
+        .visible-active {
+            border-left: 4px solid #27ae60;
+        }
+
+        .invisible-active {
+            border-left: 4px solid #f39c12;
+        }
+
+        .visible-silent {
+            border-left: 4px solid #95a5a6;
+        }
+
         .encoder-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -517,6 +590,7 @@
         <nav class="container">
             <div class="logo">SoundCLIP</div>
             <ul class="nav-links">
+                <li><a href="https://arxiv.org/abs/2506.10416" class="paper-link" target="_blank">📄 Paper</a></li>
                 <li><a href="#abstract">Abstract</a></li>
                 <li><a href="#demo">Demo</a></li>
                 <li><a href="#dataset">Dataset</a></li>
@@ -524,6 +598,11 @@
                 <li><a href="#code">Code</a></li>
             </ul>
         </nav>
+        
+        <!-- Live Demo Banner -->
+        <div style="background: #e8f5e8; border: 1px solid #4caf50; padding: 10px; text-align: center; color: #2e7d32; margin: 10px 0; border-radius: 5px;">
+            🌐 <strong>Live Interactive Demo</strong> | 📍 Official Project Page: <a href="https://ali-vosoughi.github.io/SoundCLIP/" style="color: #1976d2; font-weight: bold;">https://ali-vosoughi.github.io/SoundCLIP/</a>
+        </div>
     </header>
 
     <div class="container">
@@ -545,10 +624,10 @@
             </div>
             
             <div class="btn-group">
-                <a href="https://arxiv.org/abs/2506.10416" class="btn btn-primary">Paper</a>
-                <a href="https://github.com/ali-vosoughi/SoundCLIP" class="btn">Code</a>
-                <a href="#demo" class="btn">Interactive Demo</a>
-                <a href="#citation" class="btn">Citation</a>
+                <a href="https://arxiv.org/abs/2506.10416" class="btn btn-primary">📄 Read Paper</a>
+                <a href="https://github.com/ali-vosoughi/SoundCLIP" class="btn">💻 Code</a>
+                <a href="#demo" class="btn">🎬 Interactive Demo</a>
+                <a href="#citation" class="btn">📚 Citation</a>
             </div>
         </section>
 
@@ -581,8 +660,6 @@
                     <div class="stat-label">Demo Examples</div>
                 </div>
             </div>
-
-            
         </section>
 
         <section id="demo" class="section">
@@ -593,7 +670,7 @@
                 
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 1: </div>
+                        <div class="example-title">Example 1: Cat</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: rvbmYs4Kl3Y (Segment 01)</span>
                             <span class="score-badge">Alignment Score: 47.0/50</span>
@@ -659,6 +736,15 @@
                         </div>
                     </div>
                     
+                    <div class="sound-sources">
+                        <h4>Sound Source Visibility Analysis</h4>
+                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-item visible-active">
+                            <span class="source-label">👁️ Visible Active:</span>
+                            <span class="source-list">Man, Cutting board, Paint canister</span>
+                        </div>
+                    </div>
+                    
                     <div class="encoder-grid">
 
                         <div class="encoder-column">
@@ -694,7 +780,7 @@
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 2:</div>
+                        <div class="example-title">Example 2: Sea Waves</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: IwqD859w2_E (Segment 02)</span>
                             <span class="score-badge">Alignment Score: 44.0/50</span>
@@ -760,6 +846,19 @@
                         </div>
                     </div>
                     
+                    <div class="sound-sources">
+                        <h4>Sound Source Visibility Analysis</h4>
+                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-item visible-active">
+                            <span class="source-label">👁️ Visible Active:</span>
+                            <span class="source-list">Guitar</span>
+                        </div>
+                        <div class="source-item visible-silent">
+                            <span class="source-label">👁️ Visible Silent:</span>
+                            <span class="source-list">Microphone stand</span>
+                        </div>
+                    </div>
+                    
                     <div class="encoder-grid">
 
                         <div class="encoder-column">
@@ -795,7 +894,7 @@
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 3:</div>
+                        <div class="example-title">Example 3: Cat</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: DDer7K8WG4I (Segment 02)</span>
                             <span class="score-badge">Alignment Score: 46.0/50</span>
@@ -861,6 +960,19 @@
                         </div>
                     </div>
                     
+                    <div class="sound-sources">
+                        <h4>Sound Source Visibility Analysis</h4>
+                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-item visible-active">
+                            <span class="source-label">👁️ Visible Active:</span>
+                            <span class="source-list">Church bells</span>
+                        </div>
+                        <div class="source-item visible-silent">
+                            <span class="source-label">👁️ Visible Silent:</span>
+                            <span class="source-list">Tower, surrounding structures</span>
+                        </div>
+                    </div>
+                    
                     <div class="encoder-grid">
 
                         <div class="encoder-column">
@@ -896,7 +1008,7 @@
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 4: </div>
+                        <div class="example-title">Example 4: Cat</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: UorSpZVnX_M (Segment 02)</span>
                             <span class="score-badge">Alignment Score: 46.0/50</span>
@@ -962,6 +1074,19 @@
                         </div>
                     </div>
                     
+                    <div class="sound-sources">
+                        <h4>Sound Source Visibility Analysis</h4>
+                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-item visible-active">
+                            <span class="source-label">👁️ Visible Active:</span>
+                            <span class="source-list">mixer, speaker</span>
+                        </div>
+                        <div class="source-item visible-silent">
+                            <span class="source-label">👁️ Visible Silent:</span>
+                            <span class="source-list">kitchen utensils, granite countertop</span>
+                        </div>
+                    </div>
+                    
                     <div class="encoder-grid">
 
                         <div class="encoder-column">
@@ -997,7 +1122,7 @@
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 5: </div>
+                        <div class="example-title">Example 5: Cat</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: EQHrQIaQNv8 (Segment 03)</span>
                             <span class="score-badge">Alignment Score: 45.0/50</span>
@@ -1063,6 +1188,19 @@
                         </div>
                     </div>
                     
+                    <div class="sound-sources">
+                        <h4>Sound Source Visibility Analysis</h4>
+                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-item visible-active">
+                            <span class="source-label">👁️ Visible Active:</span>
+                            <span class="source-list">Guitar</span>
+                        </div>
+                        <div class="source-item invisible-active">
+                            <span class="source-label">👂 Invisible Active:</span>
+                            <span class="source-list">Harmonica</span>
+                        </div>
+                    </div>
+                    
                     <div class="encoder-grid">
 
                         <div class="encoder-column">
@@ -1098,7 +1236,7 @@
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 6: </div>
+                        <div class="example-title">Example 6: Cat</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: GJhYkfI7jpU (Segment 03)</span>
                             <span class="score-badge">Alignment Score: 42.0/50</span>
@@ -1164,6 +1302,19 @@
                         </div>
                     </div>
                     
+                    <div class="sound-sources">
+                        <h4>Sound Source Visibility Analysis</h4>
+                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-item visible-active">
+                            <span class="source-label">👁️ Visible Active:</span>
+                            <span class="source-list">Speaker</span>
+                        </div>
+                        <div class="source-item visible-silent">
+                            <span class="source-label">👁️ Visible Silent:</span>
+                            <span class="source-list">Green plastic container</span>
+                        </div>
+                    </div>
+                    
                     <div class="encoder-grid">
 
                         <div class="encoder-column">
@@ -1199,7 +1350,7 @@
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 7: </div>
+                        <div class="example-title">Example 7: Cat</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: AVL7Kbpw13U (Segment 01)</span>
                             <span class="score-badge">Alignment Score: 42.0/50</span>
@@ -1262,6 +1413,19 @@
                                     <span class="score-value">8/10</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sound-sources">
+                        <h4>Sound Source Visibility Analysis</h4>
+                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-item visible-active">
+                            <span class="source-label">👁️ Visible Active:</span>
+                            <span class="source-list">Person</span>
+                        </div>
+                        <div class="source-item invisible-active">
+                            <span class="source-label">👂 Invisible Active:</span>
+                            <span class="source-list">Sneeze sound</span>
                         </div>
                     </div>
                     
