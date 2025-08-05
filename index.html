@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!-- 
-SoundCLIP Project Webpage
-Live at: https://ali-vosoughi.github.io/SoundCLIP/
-Paper: https://arxiv.org/abs/2506.10416
--->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -62,19 +57,6 @@ Paper: https://arxiv.org/abs/2506.10416
         .nav-links a:hover {
             color: #3498db;
             text-decoration: underline;
-        }
-
-        .paper-link {
-            background: #e74c3c;
-            color: white !important;
-            padding: 8px 16px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        .paper-link:hover {
-            background: #c0392b;
-            text-decoration: none;
         }
 
         .title-section {
@@ -356,238 +338,6 @@ Paper: https://arxiv.org/abs/2506.10416
             font-size: 0.8rem;
         }
 
-        .sound-source-analysis {
-            margin-bottom: 25px;
-        }
-
-        .sound-source-analysis h4 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .source-categories {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        .source-category {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .source-category:hover {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .source-category.visible-active {
-            border-left: 4px solid #28a745;
-        }
-
-        .source-category.invisible-active {
-            border-left: 4px solid #ffc107;
-        }
-
-        .source-category.visible-silent {
-            border-left: 4px solid #6c757d;
-        }
-
-        .source-category.no-sources {
-            border-left: 4px solid #17a2b8;
-        }
-
-        .source-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .source-icon {
-            font-size: 1.2rem;
-        }
-
-        .source-title {
-            font-weight: 600;
-            color: #2c3e50;
-            font-size: 0.95rem;
-        }
-
-        .source-list {
-            color: #495057;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            margin-left: 28px;
-        }
-
-        .visibility-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #dee2e6;
-        }
-
-        .visibility-stats .stat-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #ffffff;
-            padding: 8px 12px;
-            border-radius: 5px;
-            border: 1px solid #e9ecef;
-        }
-
-        .visibility-stats .stat-label {
-            color: #6c757d;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .visibility-stats .stat-value {
-            color: #2c3e50;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .sound-overview {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 10px;
-            padding: 30px;
-            margin: 30px 0;
-        }
-
-        .sound-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .sound-stat-item {
-            background: #ffffff;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .sound-stat-item:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
-        }
-
-        .sound-stat-item.visible-stat {
-            border-left: 4px solid #28a745;
-        }
-
-        .sound-stat-item.invisible-stat {
-            border-left: 4px solid #ffc107;
-        }
-
-        .sound-stat-item.silent-stat {
-            border-left: 4px solid #6c757d;
-        }
-
-        .sound-stat-icon {
-            font-size: 2rem;
-            opacity: 0.8;
-        }
-
-        .sound-stat-content {
-            flex: 1;
-        }
-
-        .sound-stat-number {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #2c3e50;
-            line-height: 1;
-        }
-
-        .sound-stat-label {
-            font-size: 0.9rem;
-            color: #6c757d;
-            font-weight: 500;
-            margin-top: 2px;
-        }
-
-        .sound-stat-detail {
-            font-size: 0.8rem;
-            color: #95a5a6;
-            margin-top: 4px;
-        }
-
-        .top-sources {
-            border-top: 1px solid #dee2e6;
-            padding-top: 25px;
-        }
-
-        .top-sources h4 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            text-align: center;
-        }
-
-        .top-sources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .top-source-category {
-            background: #ffffff;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-        }
-
-        .top-source-category h5 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-            border-bottom: 1px solid #e9ecef;
-            padding-bottom: 8px;
-        }
-
-        .source-list-compact {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .source-list-compact li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 4px 0;
-            border-bottom: 1px solid #f8f9fa;
-            font-size: 0.85rem;
-        }
-
-        .source-list-compact li:last-child {
-            border-bottom: none;
-        }
-
-        .source-list-compact .count {
-            background: #e9ecef;
-            color: #495057;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
         .encoder-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -759,34 +509,6 @@ Paper: https://arxiv.org/abs/2506.10416
                 flex-direction: column;
                 gap: 10px;
             }
-
-            .visibility-stats {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-
-            .source-list {
-                margin-left: 0;
-                margin-top: 8px;
-            }
-
-            .sound-stat-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .top-sources-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .sound-stat-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-
-            .sound-stat-icon {
-                font-size: 1.5rem;
-            }
         }
     </style>
 </head>
@@ -795,7 +517,6 @@ Paper: https://arxiv.org/abs/2506.10416
         <nav class="container">
             <div class="logo">SoundCLIP</div>
             <ul class="nav-links">
-                <li><a href="https://arxiv.org/abs/2506.10416" class="paper-link" target="_blank">📄 Paper</a></li>
                 <li><a href="#abstract">Abstract</a></li>
                 <li><a href="#demo">Demo</a></li>
                 <li><a href="#dataset">Dataset</a></li>
@@ -803,11 +524,6 @@ Paper: https://arxiv.org/abs/2506.10416
                 <li><a href="#code">Code</a></li>
             </ul>
         </nav>
-        
-        <!-- Live Demo Banner -->
-        <div style="background: #e8f5e8; border: 1px solid #4caf50; padding: 10px; text-align: center; color: #2e7d32; margin: 10px 0; border-radius: 5px;">
-            🌐 <strong>Live Interactive Demo</strong> | 📍 Official Project Page: <a href="https://ali-vosoughi.github.io/SoundCLIP/" style="color: #1976d2; font-weight: bold;">https://ali-vosoughi.github.io/SoundCLIP/</a>
-        </div>
     </header>
 
     <div class="container">
@@ -829,10 +545,10 @@ Paper: https://arxiv.org/abs/2506.10416
             </div>
             
             <div class="btn-group">
-                <a href="https://arxiv.org/abs/2506.10416" class="btn btn-primary">📄 Read Paper</a>
-                <a href="https://github.com/ali-vosoughi/SoundCLIP" class="btn">💻 Code</a>
-                <a href="#demo" class="btn">🎬 Interactive Demo</a>
-                <a href="#citation" class="btn">📚 Citation</a>
+                <a href="https://arxiv.org/abs/2506.10416" class="btn btn-primary">Paper</a>
+                <a href="https://github.com/ali-vosoughi/SoundCLIP" class="btn">Code</a>
+                <a href="#demo" class="btn">Interactive Demo</a>
+                <a href="#citation" class="btn">Citation</a>
             </div>
         </section>
 
@@ -875,70 +591,7 @@ Paper: https://arxiv.org/abs/2506.10416
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">1</span>
-                    <div class="stat-label">Church Bells</div>
-                </div>
-            </div>
-
-            <h3>Sound Source Analysis Overview</h3>
-            <div class="sound-overview">
-                <div class="sound-stat-grid">
-                    <div class="sound-stat-item visible-stat">
-                        <div class="sound-stat-icon">👁️</div>
-                        <div class="sound-stat-content">
-                            <div class="sound-stat-number">9</div>
-                            <div class="sound-stat-label">Unique Visible Sources</div>
-                            <div class="sound-stat-detail">10 total instances</div>
-                        </div>
-                    </div>
-                    <div class="sound-stat-item invisible-stat">
-                        <div class="sound-stat-icon">👂</div>
-                        <div class="sound-stat-content">
-                            <div class="sound-stat-number">2</div>
-                            <div class="sound-stat-label">Unique Invisible Sources</div>
-                            <div class="sound-stat-detail">2 total instances</div>
-                        </div>
-                    </div>
-                    <div class="sound-stat-item silent-stat">
-                        <div class="sound-stat-icon">🔇</div>
-                        <div class="sound-stat-content">
-                            <div class="sound-stat-number">5</div>
-                            <div class="sound-stat-label">Unique Silent Objects</div>
-                            <div class="sound-stat-detail">5 total instances</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="top-sources">
-                    <h4>Most Common Sound Sources in Demo</h4>
-                    <div class="top-sources-grid">
-                        <div class="top-source-category">
-                            <h5>👁️ Top Visible Sources</h5>
-                            <ul class="source-list-compact">
-                                <li>Guitar: <span class="count">2</span></li>
-                                <li>Man: <span class="count">1</span></li>
-                                <li>Cutting Board: <span class="count">1</span></li>
-                                <li>Paint Canister: <span class="count">1</span></li>
-                                <li>Church Bells: <span class="count">1</span></li>
-                            </ul>
-                        </div>
-                        <div class="top-source-category">
-                            <h5>👂 Top Invisible Sources</h5>
-                            <ul class="source-list-compact">
-                                <li>Harmonica: <span class="count">1</span></li>
-                                <li>Sneeze Sound: <span class="count">1</span></li>
-                            </ul>
-                        </div>
-                        <div class="top-source-category">
-                            <h5>🔇 Top Silent Objects</h5>
-                            <ul class="source-list-compact">
-                                <li>Microphone Stand: <span class="count">1</span></li>
-                                <li>Tower, Surrounding Structures: <span class="count">1</span></li>
-                                <li>Kitchen Utensils: <span class="count">1</span></li>
-                                <li>Granite Countertop: <span class="count">1</span></li>
-                                <li>Green Plastic Container: <span class="count">1</span></li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="stat-label">Pig</div>
                 </div>
             </div>
         </section>
@@ -1017,31 +670,6 @@ Paper: https://arxiv.org/abs/2506.10416
                         </div>
                     </div>
                     
-                    <div class="sound-source-analysis">
-                        <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-categories">
-                            <div class="source-category visible-active">
-                                <div class="source-header">
-                                    <span class="source-icon">👁️</span>
-                                    <span class="source-title">Visible Active Sources (3)</span>
-                                </div>
-                                <div class="source-list">
-                                    Man, Cutting Board, Paint Canister
-                                </div>
-                            </div>
-                            <div class="visibility-stats">
-                                <div class="stat-item">
-                                    <span class="stat-label">Total Active Sources:</span>
-                                    <span class="stat-value">3</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Visibility Ratio:</span>
-                                    <span class="stat-value">100.0%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <div class="encoder-grid">
 
                         <div class="encoder-column">
@@ -1077,7 +705,7 @@ Paper: https://arxiv.org/abs/2506.10416
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 2: Church Bells</div>
+                        <div class="example-title">Example 2: Pig</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: IwqD859w2_E (Segment 02)</span>
                             <span class="score-badge">Alignment Score: 44.0/50</span>
@@ -1138,40 +766,6 @@ Paper: https://arxiv.org/abs/2506.10416
                                 <div class="score-bar">
                                     <div class="score-fill" style="width: 80.0%"></div>
                                     <span class="score-value">8/10</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="sound-source-analysis">
-                        <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-categories">
-                            <div class="source-category visible-active">
-                                <div class="source-header">
-                                    <span class="source-icon">👁️</span>
-                                    <span class="source-title">Visible Active Sources (1)</span>
-                                </div>
-                                <div class="source-list">
-                                    Guitar
-                                </div>
-                            </div>
-                            <div class="source-category visible-silent">
-                                <div class="source-header">
-                                    <span class="source-icon">🔇</span>
-                                    <span class="source-title">Visible Silent Objects (1)</span>
-                                </div>
-                                <div class="source-list">
-                                    Microphone Stand
-                                </div>
-                            </div>
-                            <div class="visibility-stats">
-                                <div class="stat-item">
-                                    <span class="stat-label">Total Active Sources:</span>
-                                    <span class="stat-value">1</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Visibility Ratio:</span>
-                                    <span class="stat-value">100.0%</span>
                                 </div>
                             </div>
                         </div>
@@ -1278,40 +872,6 @@ Paper: https://arxiv.org/abs/2506.10416
                         </div>
                     </div>
                     
-                    <div class="sound-source-analysis">
-                        <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-categories">
-                            <div class="source-category visible-active">
-                                <div class="source-header">
-                                    <span class="source-icon">👁️</span>
-                                    <span class="source-title">Visible Active Sources (1)</span>
-                                </div>
-                                <div class="source-list">
-                                    Church Bells
-                                </div>
-                            </div>
-                            <div class="source-category visible-silent">
-                                <div class="source-header">
-                                    <span class="source-icon">🔇</span>
-                                    <span class="source-title">Visible Silent Objects (1)</span>
-                                </div>
-                                <div class="source-list">
-                                    Tower, Surrounding Structures
-                                </div>
-                            </div>
-                            <div class="visibility-stats">
-                                <div class="stat-item">
-                                    <span class="stat-label">Total Active Sources:</span>
-                                    <span class="stat-value">1</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Visibility Ratio:</span>
-                                    <span class="stat-value">100.0%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <div class="encoder-grid">
 
                         <div class="encoder-column">
@@ -1408,40 +968,6 @@ Paper: https://arxiv.org/abs/2506.10416
                                 <div class="score-bar">
                                     <div class="score-fill" style="width: 80.0%"></div>
                                     <span class="score-value">8/10</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="sound-source-analysis">
-                        <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-categories">
-                            <div class="source-category visible-active">
-                                <div class="source-header">
-                                    <span class="source-icon">👁️</span>
-                                    <span class="source-title">Visible Active Sources (2)</span>
-                                </div>
-                                <div class="source-list">
-                                    Mixer, Speaker
-                                </div>
-                            </div>
-                            <div class="source-category visible-silent">
-                                <div class="source-header">
-                                    <span class="source-icon">🔇</span>
-                                    <span class="source-title">Visible Silent Objects (2)</span>
-                                </div>
-                                <div class="source-list">
-                                    Kitchen Utensils, Granite Countertop
-                                </div>
-                            </div>
-                            <div class="visibility-stats">
-                                <div class="stat-item">
-                                    <span class="stat-label">Total Active Sources:</span>
-                                    <span class="stat-value">2</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Visibility Ratio:</span>
-                                    <span class="stat-value">100.0%</span>
                                 </div>
                             </div>
                         </div>
@@ -1548,40 +1074,6 @@ Paper: https://arxiv.org/abs/2506.10416
                         </div>
                     </div>
                     
-                    <div class="sound-source-analysis">
-                        <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-categories">
-                            <div class="source-category visible-active">
-                                <div class="source-header">
-                                    <span class="source-icon">👁️</span>
-                                    <span class="source-title">Visible Active Sources (1)</span>
-                                </div>
-                                <div class="source-list">
-                                    Guitar
-                                </div>
-                            </div>
-                            <div class="source-category invisible-active">
-                                <div class="source-header">
-                                    <span class="source-icon">👂</span>
-                                    <span class="source-title">Invisible Active Sources (1)</span>
-                                </div>
-                                <div class="source-list">
-                                    Harmonica
-                                </div>
-                            </div>
-                            <div class="visibility-stats">
-                                <div class="stat-item">
-                                    <span class="stat-label">Total Active Sources:</span>
-                                    <span class="stat-value">2</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Visibility Ratio:</span>
-                                    <span class="stat-value">50.0%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <div class="encoder-grid">
 
                         <div class="encoder-column">
@@ -1683,40 +1175,6 @@ Paper: https://arxiv.org/abs/2506.10416
                         </div>
                     </div>
                     
-                    <div class="sound-source-analysis">
-                        <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-categories">
-                            <div class="source-category visible-active">
-                                <div class="source-header">
-                                    <span class="source-icon">👁️</span>
-                                    <span class="source-title">Visible Active Sources (1)</span>
-                                </div>
-                                <div class="source-list">
-                                    Speaker
-                                </div>
-                            </div>
-                            <div class="source-category visible-silent">
-                                <div class="source-header">
-                                    <span class="source-icon">🔇</span>
-                                    <span class="source-title">Visible Silent Objects (1)</span>
-                                </div>
-                                <div class="source-list">
-                                    Green Plastic Container
-                                </div>
-                            </div>
-                            <div class="visibility-stats">
-                                <div class="stat-item">
-                                    <span class="stat-label">Total Active Sources:</span>
-                                    <span class="stat-value">1</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Visibility Ratio:</span>
-                                    <span class="stat-value">100.0%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <div class="encoder-grid">
 
                         <div class="encoder-column">
@@ -1813,40 +1271,6 @@ Paper: https://arxiv.org/abs/2506.10416
                                 <div class="score-bar">
                                     <div class="score-fill" style="width: 80.0%"></div>
                                     <span class="score-value">8/10</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="sound-source-analysis">
-                        <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-categories">
-                            <div class="source-category visible-active">
-                                <div class="source-header">
-                                    <span class="source-icon">👁️</span>
-                                    <span class="source-title">Visible Active Sources (1)</span>
-                                </div>
-                                <div class="source-list">
-                                    Person
-                                </div>
-                            </div>
-                            <div class="source-category invisible-active">
-                                <div class="source-header">
-                                    <span class="source-icon">👂</span>
-                                    <span class="source-title">Invisible Active Sources (1)</span>
-                                </div>
-                                <div class="source-list">
-                                    Sneeze Sound
-                                </div>
-                            </div>
-                            <div class="visibility-stats">
-                                <div class="stat-item">
-                                    <span class="stat-label">Total Active Sources:</span>
-                                    <span class="stat-value">2</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Visibility Ratio:</span>
-                                    <span class="stat-value">50.0%</span>
                                 </div>
                             </div>
                         </div>
