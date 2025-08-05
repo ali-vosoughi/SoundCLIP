@@ -161,6 +161,33 @@
             color: #444;
         }
 
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3498db;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
         /* Demo Section Specific Styles */
         .demo-container {
             background: #f8f9fa;
@@ -188,9 +215,33 @@
         }
 
         .example-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .example-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
             margin-bottom: 15px;
+        }
+
+        .video-id {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .score-badge {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
         .video-container {
@@ -199,11 +250,92 @@
         }
 
         .demo-video {
-            max-width: 100%;
-            width: 400px;
+            width: 100%;
+            max-width: 400px;
             height: 225px;
             border: 1px solid #dee2e6;
             border-radius: 5px;
+        }
+
+        .descriptions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .description-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        .description-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .description-card p {
+            color: #495057;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .alignment-scores {
+            margin-bottom: 25px;
+        }
+
+        .alignment-scores h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .scores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .score-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+        }
+
+        .score-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .score-bar {
+            background: #ecf0f1;
+            border-radius: 10px;
+            height: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.8s ease;
+        }
+
+        .score-value {
+            position: absolute;
+            top: 50%;
+            right: 8px;
+            transform: translateY(-50%);
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 0.8rem;
         }
 
         .encoder-grid {
@@ -282,33 +414,6 @@
             margin-bottom: 15px;
             font-weight: bold;
             color: #2c3e50;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .stat-item {
-            padding: 20px;
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #3498db;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #6c757d;
-            margin-top: 5px;
         }
 
         .citation-box {
@@ -391,6 +496,19 @@
                 max-width: 350px;
                 height: auto;
             }
+
+            .descriptions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scores-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .example-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -441,155 +559,13 @@
             <p>Our findings reveal that the initial architectural type of the encoder determines how it responds to the alignment process. Image-centric encoders demonstrate exceptional performance in cross-modal retrieval, but this intensive alignment causes compression of unique linguistic information and reduces the quality of their text description generation. In contrast, text-centric encoders maintain better balance between the two objectives, revealing a fundamental trade-off where excessive alignment with the visual manifold leads to improved retrieval capabilities, but simultaneously reduces the richness of acoustic and linguistic information necessary for quality text description generation.</p>
         </section>
 
-        <section id="demo" class="section">
-            <h2>Interactive Demo</h2>
-            <p>Explore how different audio encoders (Raw vs Projected) generate different captions for the same audiovisual content. Click on any encoder mode button to see the generated caption.</p>
-            
-            <div class="demo-container">
-                <!-- Example 1 -->
-                <div class="demo-example">
-                    <div class="example-header">
-                        <div class="example-title">Example 1: Guitar Playing</div>
-                    </div>
-                    
-                    <div class="video-container">
-                        <video class="demo-video" controls preload="metadata">
-                            <source src="demos/example1.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    
-                    <div class="encoder-grid">
-                        <div class="encoder-column">
-                            <div class="encoder-label">ImageBind</div>
-                            <button class="mode-button" data-example="1" data-encoder="imagebind" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="1" data-encoder="imagebind" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">AudioCLIP</div>
-                            <button class="mode-button" data-example="1" data-encoder="audioclip" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="1" data-encoder="audioclip" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">CLAP</div>
-                            <button class="mode-button" data-example="1" data-encoder="clap" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="1" data-encoder="clap" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">Wav2CLIP</div>
-                            <button class="mode-button" data-example="1" data-encoder="wav2clip" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="1" data-encoder="wav2clip" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">Whisper</div>
-                            <button class="mode-button" data-example="1" data-encoder="whisper" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="1" data-encoder="whisper" data-mode="raw">Raw</button>
-                        </div>
-                    </div>
-                    
-                    <div class="current-selection" id="selection-1">Select an encoder mode to view generated caption</div>
-                    <div class="caption-display empty" id="caption-1">Click any button above to see the generated caption for this audiovisual example.</div>
-                </div>
-
-                <!-- Example 2 -->
-                <div class="demo-example">
-                    <div class="example-header">
-                        <div class="example-title">Example 2: Nature Sounds</div>
-                    </div>
-                    
-                    <div class="video-container">
-                        <video class="demo-video" controls preload="metadata">
-                            <source src="demos/example2.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    
-                    <div class="encoder-grid">
-                        <div class="encoder-column">
-                            <div class="encoder-label">ImageBind</div>
-                            <button class="mode-button" data-example="2" data-encoder="imagebind" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="2" data-encoder="imagebind" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">AudioCLIP</div>
-                            <button class="mode-button" data-example="2" data-encoder="audioclip" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="2" data-encoder="audioclip" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">CLAP</div>
-                            <button class="mode-button" data-example="2" data-encoder="clap" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="2" data-encoder="clap" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">Wav2CLIP</div>
-                            <button class="mode-button" data-example="2" data-encoder="wav2clip" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="2" data-encoder="wav2clip" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">Whisper</div>
-                            <button class="mode-button" data-example="2" data-encoder="whisper" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="2" data-encoder="whisper" data-mode="raw">Raw</button>
-                        </div>
-                    </div>
-                    
-                    <div class="current-selection" id="selection-2">Select an encoder mode to view generated caption</div>
-                    <div class="caption-display empty" id="caption-2">Click any button above to see the generated caption for this audiovisual example.</div>
-                </div>
-
-                <!-- Example 3 -->
-                <div class="demo-example">
-                    <div class="example-header">
-                        <div class="example-title">Example 3: Urban Environment</div>
-                    </div>
-                    
-                    <div class="video-container">
-                        <video class="demo-video" controls preload="metadata">
-                            <source src="demos/example3.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    
-                    <div class="encoder-grid">
-                        <div class="encoder-column">
-                            <div class="encoder-label">ImageBind</div>
-                            <button class="mode-button" data-example="3" data-encoder="imagebind" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="3" data-encoder="imagebind" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">AudioCLIP</div>
-                            <button class="mode-button" data-example="3" data-encoder="audioclip" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="3" data-encoder="audioclip" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">CLAP</div>
-                            <button class="mode-button" data-example="3" data-encoder="clap" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="3" data-encoder="clap" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">Wav2CLIP</div>
-                            <button class="mode-button" data-example="3" data-encoder="wav2clip" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="3" data-encoder="wav2clip" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">Whisper</div>
-                            <button class="mode-button" data-example="3" data-encoder="whisper" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-example="3" data-encoder="whisper" data-mode="raw">Raw</button>
-                        </div>
-                    </div>
-                    
-                    <div class="current-selection" id="selection-3">Select an encoder mode to view generated caption</div>
-                    <div class="caption-display empty" id="caption-3">Click any button above to see the generated caption for this audiovisual example.</div>
-                </div>
-            </div>
-        </section>
-
         <section id="dataset" class="section">
             <h2>AVE-2 Dataset</h2>
             <p>We introduce <strong>AudioVisual Event Evaluation (AVE-2)</strong>, a dataset of 580,147 three-second audiovisual clips with fine-grained alignment annotations. Unlike existing datasets that treat alignment as binary, AVE-2 provides detailed alignment scores across five dimensions, enabling systematic investigation of audio-visual correspondence quality.</p>
 
             <div class="stats">
                 <div class="stat-item">
-                    <span class="stat-number">580,147</span>
+                    <span class="stat-number">580K</span>
                     <div class="stat-label">Audio-Visual Clips</div>
                 </div>
                 <div class="stat-item">
@@ -601,9 +577,738 @@
                     <div class="stat-label">Seconds per Clip</div>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">10</span>
-                    <div class="stat-label">Encoder Modes</div>
+                    <span class="stat-number">16</span>
+                    <div class="stat-label">Demo Examples</div>
                 </div>
+            </div>
+
+            <h3>Sample Distribution</h3>
+            <div class="stats">
+                
+                <div class="stat-item">
+                    <span class="stat-number">6</span>
+                    <div class="stat-label">Cat</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1</span>
+                    <div class="stat-label">Helicopter</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo" class="section">
+            <h2>Interactive Demo</h2>
+            <p>Explore how different audio encoders (Raw vs Projected) generate different captions for the same audiovisual content. Click on any encoder mode button to see the generated caption.</p>
+            
+            <div class="demo-container">
+                
+                <div class="demo-example">
+                    <div class="example-header">
+                        <div class="example-title">Example 1: Cat</div>
+                        <div class="example-meta">
+                            <span class="video-id">Video ID: rvbmYs4Kl3Y (Segment 01)</span>
+                            <span class="score-badge">Alignment Score: 47.0/50</span>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <video class="demo-video" controls preload="metadata">
+                            <source src="videos/rvbmYs4Kl3Y_01.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="descriptions-grid">
+                        <div class="description-card">
+                            <h4>Visual Description</h4>
+                            <p>The video takes place in a workshop setting, specifically at Finney's. The background features various tools and materials typically found in woodworking or similar crafts, such as wooden planks, a workbench, and shelves with additional items. There is also signage indicating "Finney's Expert Advice Simple Solutions Beautiful Work" on the wall. In the first scene, an individual wearing glasses and a black shirt with a white apron stands behind a workbench. They are holding a can of paint and appear to be preparing it for use. On the workbench, there is a rectangular piece of wood that looks like a cutting board, along with other tools and materials. A bottle labeled "Paint" is placed nearby, suggesting that painting might be part of their task. The second scene shows the same person continuing to prepare the paint can. This time, they are using their hands to apply the paint onto the cutting board. The environment remains consistent throughout, reinforcing the idea that this is a dedicated workspace for painting tasks. The third scene continues with the individual still engaged in painting. The focus remains on the process of applying the paint, which appears to be a light color given its sheen. The surrounding area includes more tools and materials, maintaining the workshop ambiance. The fourth scene captures another moment where the individual is seen working on the painting process. The lighting seems slightly dimmer than in previous scenes, possibly due to the nature of the work being done. The overall mood remains focused and industrious. The fifth scene returns to the individual standing behind the workbench, now holding a small container that likely contains additional paint or a different type of material. The arrangement of objects and characters suggests a continuation of the painting activity. The final scene shifts to a different angle, showing the individual from a side perspective. The lighting is brighter compared to earlier scenes, emphasizing the ongoing painting activity. The surroundings remain unchanged, reinforcing the continuity of the workshop environment. Overall, the video provides a detailed look into a typical day in a woodworking workshop, focusing on the activities involved in painting.</p>
+                        </div>
+                        <div class="description-card">
+                            <h4>Audio Description</h4>
+                            <p>Labels with acoustic features: Deep, resonant, authoritative, and assertive -> Male speech, man speaking; Characterized by its loudness, pitch, and timbre -> Speech; Generally high frequency, short duration -> Animal</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alignment-scores">
+                        <h4>Alignment Analysis</h4>
+                        <div class="scores-grid">
+                            <div class="score-item">
+                                <div class="score-label">Temporal</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Spatial</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Contextual</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Causality</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90.0%"></div>
+                                    <span class="score-value">9/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Visibility</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="encoder-grid">
+
+                        <div class="encoder-column">
+                            <div class="encoder-label">AUDIOCLIP</div>
+                            <button class="mode-button" data-encoder="audioclip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="audioclip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">CLAP</div>
+                            <button class="mode-button" data-encoder="clap" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="clap" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WAV2CLIP</div>
+                            <button class="mode-button" data-encoder="wav2clip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WHISPERCLIP</div>
+                            <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">IMAGEBIND</div>
+                            <button class="mode-button" data-encoder="imagebind" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="imagebind" data-mode="raw">Raw</button>
+                        </div>
+                    </div>
+                    
+                    <div class="current-selection" id="selection-1">Select an encoder mode to view generated caption</div>
+                    <div class="caption-display empty" id="caption-1">Click any button above to see the generated caption for this audiovisual example.</div>
+                </div>
+            
+                <div class="demo-example">
+                    <div class="example-header">
+                        <div class="example-title">Example 2: Helicopter</div>
+                        <div class="example-meta">
+                            <span class="video-id">Video ID: IwqD859w2_E (Segment 02)</span>
+                            <span class="score-badge">Alignment Score: 44.0/50</span>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <video class="demo-video" controls preload="metadata">
+                            <source src="videos/IwqD859w2_E_02.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="descriptions-grid">
+                        <div class="description-card">
+                            <h4>Visual Description</h4>
+                            <p>The video begins with a close-up of a person playing a red acoustic guitar on a wooden floor. The lighting is dim, creating shadows and highlighting the guitar's details. The background is dark, emphasizing the subject in focus. As the video progresses, the scene transitions to a wider shot showing the same person from behind, still holding the guitar. The lighting remains consistent, casting soft shadows around the person and the guitar. The setting appears to be indoors, possibly a room or studio, given the presence of what looks like a microphone stand in the background. In the final part of the video, the camera shifts slightly to show more of the person's hands as they play the guitar. The lighting continues to be dim, maintaining the mood of the earlier scenes. The person's movements are deliberate and focused, suggesting a practice session or performance. Throughout the video, there are no significant changes in the environment or actions apart from the progression of the shots. The overall atmosphere is one of concentration and musical expression.</p>
+                        </div>
+                        <div class="description-card">
+                            <h4>Audio Description</h4>
+                            <p>Labels with acoustic features: Rich and varied -> Musical instrument; Bright and percussive -> Plucked string instrument; Full, bright, and complex -> Guitar; Rich and dynamic -> Music; Strong and resonant -> Piano; Bright and percussive -> Percussion; Warm and full-bodied -> Acoustic guitar; Bright and percussive -> Strum</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alignment-scores">
+                        <h4>Alignment Analysis</h4>
+                        <div class="scores-grid">
+                            <div class="score-item">
+                                <div class="score-label">Temporal</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90.0%"></div>
+                                    <span class="score-value">9/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Spatial</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Contextual</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Causality</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90.0%"></div>
+                                    <span class="score-value">9/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Visibility</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="encoder-grid">
+
+                        <div class="encoder-column">
+                            <div class="encoder-label">AUDIOCLIP</div>
+                            <button class="mode-button" data-encoder="audioclip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="audioclip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">CLAP</div>
+                            <button class="mode-button" data-encoder="clap" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="clap" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WAV2CLIP</div>
+                            <button class="mode-button" data-encoder="wav2clip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WHISPERCLIP</div>
+                            <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">IMAGEBIND</div>
+                            <button class="mode-button" data-encoder="imagebind" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="imagebind" data-mode="raw">Raw</button>
+                        </div>
+                    </div>
+                    
+                    <div class="current-selection" id="selection-2">Select an encoder mode to view generated caption</div>
+                    <div class="caption-display empty" id="caption-2">Click any button above to see the generated caption for this audiovisual example.</div>
+                </div>
+            
+                <div class="demo-example">
+                    <div class="example-header">
+                        <div class="example-title">Example 3: Cat</div>
+                        <div class="example-meta">
+                            <span class="video-id">Video ID: DDer7K8WG4I (Segment 02)</span>
+                            <span class="score-badge">Alignment Score: 46.0/50</span>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <video class="demo-video" controls preload="metadata">
+                            <source src="videos/DDer7K8WG4I_02.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="descriptions-grid">
+                        <div class="description-card">
+                            <h4>Visual Description</h4>
+                            <p>The video begins with a view of an old, tall brick tower with pointed arches and decorative elements. The tower has three levels, each adorned with ornate details such as statues and intricate patterns. At the top level, there are two bells hanging from what appears to be a small balcony or ledge. Below this, on the second level, there is another set of bells, also hanging from a similar structure. In the foreground, there's a building with a sign that reads "PITI" in red letters against a white background. To the left side of the frame, part of another building can be seen, which seems to have a more modern appearance compared to the one in the foreground. The scene transitions smoothly into a festive atmosphere, indicated by garlands draped across the lower portion of the image. The sky remains overcast, suggesting it might be a cloudy day. As the video progresses, the focus shifts back to the tower, now showing its full height and detailed architecture. The bells remain visible, and the overall setting remains consistent throughout the video. Towards the end of the video, the camera angle changes slightly, revealing more of the surroundings, including additional buildings and trees. The lighting dims slightly, indicating either early morning or late afternoon light. Throughout the video, the visual elements include the brick tower, the bell towers, the greenery, and the architectural style of the surrounding structures. There are no significant movements apart from the slight change in perspective.</p>
+                        </div>
+                        <div class="description-card">
+                            <h4>Audio Description</h4>
+                            <p>Audio caption: A church bell is ringing in a town square.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alignment-scores">
+                        <h4>Alignment Analysis</h4>
+                        <div class="scores-grid">
+                            <div class="score-item">
+                                <div class="score-label">Temporal</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Spatial</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Contextual</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90.0%"></div>
+                                    <span class="score-value">9/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Causality</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90.0%"></div>
+                                    <span class="score-value">9/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Visibility</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="encoder-grid">
+
+                        <div class="encoder-column">
+                            <div class="encoder-label">AUDIOCLIP</div>
+                            <button class="mode-button" data-encoder="audioclip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="audioclip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">CLAP</div>
+                            <button class="mode-button" data-encoder="clap" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="clap" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WAV2CLIP</div>
+                            <button class="mode-button" data-encoder="wav2clip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WHISPERCLIP</div>
+                            <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">IMAGEBIND</div>
+                            <button class="mode-button" data-encoder="imagebind" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="imagebind" data-mode="raw">Raw</button>
+                        </div>
+                    </div>
+                    
+                    <div class="current-selection" id="selection-3">Select an encoder mode to view generated caption</div>
+                    <div class="caption-display empty" id="caption-3">Click any button above to see the generated caption for this audiovisual example.</div>
+                </div>
+            
+                <div class="demo-example">
+                    <div class="example-header">
+                        <div class="example-title">Example 4: Cat</div>
+                        <div class="example-meta">
+                            <span class="video-id">Video ID: UorSpZVnX_M (Segment 02)</span>
+                            <span class="score-badge">Alignment Score: 46.0/50</span>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <video class="demo-video" controls preload="metadata">
+                            <source src="videos/UorSpZVnX_M_02.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="descriptions-grid">
+                        <div class="description-card">
+                            <h4>Visual Description</h4>
+                            <p>The video begins with a close-up view of a red stand mixer on a kitchen countertop. The mixer is in the process of mixing dough, which appears to be light yellow and slightly sticky. The background shows a granite countertop and some kitchen utensils, indicating that this scene takes place in a home kitchen. As the video progresses, the focus shifts to the dough being mixed by the mixer. The dough is thick and smooth, with visible air bubbles indicating it has been kneaded. The mixer's motor is spinning rapidly as the dough is being incorporated into the bowl. The lighting is bright, illuminating the dough and making its texture more visible. Towards the end of the video, the dough is fully mixed and ready for the next step in the recipe. The mixer continues to spin at high speed, ensuring the dough is well-mixed and evenly spread out. The background remains consistent throughout, showing the same kitchen countertop and utensils. Throughout the video, there are no significant changes or transitions between scenes; the setting and actions remain constant. The overall mood conveyed by the visual elements is one of preparation and cooking, suggesting that the person preparing the dough is likely following a recipe or instructions provided in the video.</p>
+                        </div>
+                        <div class="description-card">
+                            <h4>Audio Description</h4>
+                            <p>Labels with acoustic features: High-pitched and whirring -> Power tool; Rich in frequency modulation -> Speech</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alignment-scores">
+                        <h4>Alignment Analysis</h4>
+                        <div class="scores-grid">
+                            <div class="score-item">
+                                <div class="score-label">Temporal</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90.0%"></div>
+                                    <span class="score-value">9/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Spatial</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Contextual</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Causality</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90.0%"></div>
+                                    <span class="score-value">9/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Visibility</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="encoder-grid">
+
+                        <div class="encoder-column">
+                            <div class="encoder-label">AUDIOCLIP</div>
+                            <button class="mode-button" data-encoder="audioclip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="audioclip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">CLAP</div>
+                            <button class="mode-button" data-encoder="clap" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="clap" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WAV2CLIP</div>
+                            <button class="mode-button" data-encoder="wav2clip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WHISPERCLIP</div>
+                            <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">IMAGEBIND</div>
+                            <button class="mode-button" data-encoder="imagebind" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="imagebind" data-mode="raw">Raw</button>
+                        </div>
+                    </div>
+                    
+                    <div class="current-selection" id="selection-4">Select an encoder mode to view generated caption</div>
+                    <div class="caption-display empty" id="caption-4">Click any button above to see the generated caption for this audiovisual example.</div>
+                </div>
+            
+                <div class="demo-example">
+                    <div class="example-header">
+                        <div class="example-title">Example 5: Cat</div>
+                        <div class="example-meta">
+                            <span class="video-id">Video ID: EQHrQIaQNv8 (Segment 03)</span>
+                            <span class="score-badge">Alignment Score: 45.0/50</span>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <video class="demo-video" controls preload="metadata">
+                            <source src="videos/EQHrQIaQNv8_03.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="descriptions-grid">
+                        <div class="description-card">
+                            <h4>Visual Description</h4>
+                            <p>The video begins with a close-up of a person's hands playing an electric guitar. The individual is wearing a black shirt and brown pants, seated on what appears to be a bench or chair. The background is out of focus, but it seems to be an indoor setting with artificial lighting. The scene transitions smoothly into the next frame, where the same person is seen holding the same electric guitar. This time, the guitar has a unique design that resembles a long-necked instrument, possibly a custom-built model known as a "Guitar Hero." The guitar features a prominent logo at the bottom that reads "Guitar Hero," indicating its brand identity. The person continues to play the guitar, adjusting their fingers on the fretboard and strumming the strings. In the final part of the video, the person is still engaged in playing the Guitar Hero guitar. They are shown from a slightly different angle, maintaining the same posture and focus on the guitar. The background remains consistent throughout this segment, reinforcing the continuity between scenes. Throughout the video, there are no significant changes in the environment or actions; the setting remains unchanged, and the main action revolves around the guitar player and their interaction with the instrument.</p>
+                        </div>
+                        <div class="description-card">
+                            <h4>Audio Description</h4>
+                            <p>Labels with acoustic features: Rich in frequency modulation -> Speech; Bright and clear -> Harmonica; Smooth and resonant -> Guitar</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alignment-scores">
+                        <h4>Alignment Analysis</h4>
+                        <div class="scores-grid">
+                            <div class="score-item">
+                                <div class="score-label">Temporal</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Spatial</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Contextual</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Causality</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90.0%"></div>
+                                    <span class="score-value">9/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Visibility</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="encoder-grid">
+
+                        <div class="encoder-column">
+                            <div class="encoder-label">AUDIOCLIP</div>
+                            <button class="mode-button" data-encoder="audioclip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="audioclip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">CLAP</div>
+                            <button class="mode-button" data-encoder="clap" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="clap" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WAV2CLIP</div>
+                            <button class="mode-button" data-encoder="wav2clip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WHISPERCLIP</div>
+                            <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">IMAGEBIND</div>
+                            <button class="mode-button" data-encoder="imagebind" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="imagebind" data-mode="raw">Raw</button>
+                        </div>
+                    </div>
+                    
+                    <div class="current-selection" id="selection-5">Select an encoder mode to view generated caption</div>
+                    <div class="caption-display empty" id="caption-5">Click any button above to see the generated caption for this audiovisual example.</div>
+                </div>
+            
+                <div class="demo-example">
+                    <div class="example-header">
+                        <div class="example-title">Example 6: Cat</div>
+                        <div class="example-meta">
+                            <span class="video-id">Video ID: GJhYkfI7jpU (Segment 03)</span>
+                            <span class="score-badge">Alignment Score: 42.0/50</span>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <video class="demo-video" controls preload="metadata">
+                            <source src="videos/GJhYkfI7jpU_03.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="descriptions-grid">
+                        <div class="description-card">
+                            <h4>Visual Description</h4>
+                            <p>The video begins with a close-up of a person's hand holding a black speaker. The background shows a wooden block and a green plastic container on a table, suggesting an indoor setting possibly in a kitchen or workshop. The scene transitions to the speaker being turned off, indicating that it is not currently playing music. Next, the focus shifts to a small circuit board placed on the same table as the speaker. A blue LED light is illuminated, which could be part of an electronic project or experiment. The circuit board has several wires connected to it, some of which are visible and appear to be part of the electronics setup. The video then moves forward to show the same circuit board now powered up by a battery, with the blue LED light still on. This suggests that the circuitry is functioning correctly and is likely part of a larger electronic device or system. In the final segment, the video continues with the circuit board now powered up, showing the blue LED light glowing brightly. The surrounding environment remains consistent with the previous scenes, maintaining continuity between the different stages of the project. Throughout the video, there are no significant changes in the actions or events occurring; instead, the sequence of images captures the progression from turning off the speaker to powering up the circuit board and finally illuminating the LED light.</p>
+                        </div>
+                        <div class="description-card">
+                            <h4>Audio Description</h4>
+                            <p>Labels with acoustic features: Rich in frequency modulation -> Speech; Bright and sharp -> Alarm clock</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alignment-scores">
+                        <h4>Alignment Analysis</h4>
+                        <div class="scores-grid">
+                            <div class="score-item">
+                                <div class="score-label">Temporal</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Spatial</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Contextual</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 70.0%"></div>
+                                    <span class="score-value">7/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Causality</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90.0%"></div>
+                                    <span class="score-value">9/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Visibility</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="encoder-grid">
+
+                        <div class="encoder-column">
+                            <div class="encoder-label">AUDIOCLIP</div>
+                            <button class="mode-button" data-encoder="audioclip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="audioclip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">CLAP</div>
+                            <button class="mode-button" data-encoder="clap" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="clap" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WAV2CLIP</div>
+                            <button class="mode-button" data-encoder="wav2clip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WHISPERCLIP</div>
+                            <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">IMAGEBIND</div>
+                            <button class="mode-button" data-encoder="imagebind" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="imagebind" data-mode="raw">Raw</button>
+                        </div>
+                    </div>
+                    
+                    <div class="current-selection" id="selection-6">Select an encoder mode to view generated caption</div>
+                    <div class="caption-display empty" id="caption-6">Click any button above to see the generated caption for this audiovisual example.</div>
+                </div>
+            
+                <div class="demo-example">
+                    <div class="example-header">
+                        <div class="example-title">Example 7: Cat</div>
+                        <div class="example-meta">
+                            <span class="video-id">Video ID: AVL7Kbpw13U (Segment 01)</span>
+                            <span class="score-badge">Alignment Score: 42.0/50</span>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <video class="demo-video" controls preload="metadata">
+                            <source src="videos/AVL7Kbpw13U_01.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="descriptions-grid">
+                        <div class="description-card">
+                            <h4>Visual Description</h4>
+                            <p>The video begins with a person sitting on a chair, wrapped in a maroon blanket or towel. The background features a wooden floor and various plants, creating an indoor setting that appears cozy and lived-in. As the scene develops, the person starts to move around, bending down and adjusting their position slightly. They eventually sit up straight again, still wrapped in the same maroon item. In the next few frames, the person continues to adjust their posture while still wrapped in the blanket. This suggests they are either getting ready for bed or preparing to get out of bed. The room's decor remains consistent throughout, maintaining a warm and homely atmosphere. Towards the end of this segment, the person is seen standing up from the chair, holding the blanket over their head as if it were a hat. This action indicates they might be about to put it back on or have just taken it off. The final frame shows the person walking away from the chair, leaving the scene empty once more. Throughout the video, there are no significant changes in the environment or actions apart from the person's movements. The lighting is soft and natural, suggesting daytime or well-lit indoor conditions. There are no visible texts or subtitles within the video itself.</p>
+                        </div>
+                        <div class="description-card">
+                            <h4>Audio Description</h4>
+                            <p>Labels with acoustic features: Rich in frequency modulation -> Speech; High-pitched and short -> Sneeze; Generally high pitched, sweet, and giggly -> Child speech, kid speaking; Loud, harsh, and discordant -> Noise; Chaotic and non-structured -> Background noise; Full range and varied -> Human voice; Richly complex -> Human voice</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alignment-scores">
+                        <h4>Alignment Analysis</h4>
+                        <div class="scores-grid">
+                            <div class="score-item">
+                                <div class="score-label">Temporal</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Spatial</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Contextual</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 70.0%"></div>
+                                    <span class="score-value">7/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Causality</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90.0%"></div>
+                                    <span class="score-value">9/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Visibility</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="encoder-grid">
+
+                        <div class="encoder-column">
+                            <div class="encoder-label">AUDIOCLIP</div>
+                            <button class="mode-button" data-encoder="audioclip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="audioclip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">CLAP</div>
+                            <button class="mode-button" data-encoder="clap" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="clap" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WAV2CLIP</div>
+                            <button class="mode-button" data-encoder="wav2clip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WHISPERCLIP</div>
+                            <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">IMAGEBIND</div>
+                            <button class="mode-button" data-encoder="imagebind" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="imagebind" data-mode="raw">Raw</button>
+                        </div>
+                    </div>
+                    
+                    <div class="current-selection" id="selection-7">Select an encoder mode to view generated caption</div>
+                    <div class="caption-display empty" id="caption-7">Click any button above to see the generated caption for this audiovisual example.</div>
+                </div>
+            
             </div>
         </section>
 
@@ -675,85 +1380,172 @@
     </footer>
 
     <script>
-        // Sample caption data - replace with your actual captions
         const captionData = {
-            "1": {
-                "imagebind": {
-                    "projected": "The image shows a person playing a guitar with sophisticated musical technique. The projected alignment captures the harmonic relationships between visual finger movements and the resulting acoustic patterns.",
-                    "raw": "A person is playing a guitar. The raw audio encoding preserves the authentic acoustic characteristics without visual manifold compression."
-                },
-                "audioclip": {
-                    "projected": "The image you've provided is of a person playing a guitar. We can hear the guitar's strings being plucked and the vibration of the strings being converted into sound by the guitar's body. The person is likely strumming or picking the strings, which produces the musical notes we can hear.",
-                    "raw": "A person playing guitar with natural sound characteristics. Raw encoding maintains the full spectrum of acoustic information without projection constraints."
-                },
-                "clap": {
-                    "projected": "Guitar performance with enhanced cross-modal alignment between visual and audio features, resulting in more consistent audio-visual correspondence.",
-                    "raw": "Musical performance on acoustic guitar. Text-supervised encoding preserves linguistic richness while maintaining authentic audio representation."
-                },
-                "wav2clip": {
-                    "projected": "Person playing guitar with optimized audio-visual synchronization. Projected features show improved retrieval performance through visual manifold alignment.",
-                    "raw": "Guitar playing scene with preserved acoustic authenticity. Raw features maintain original audio characteristics without visual space compression."
-                },
-                "whisper": {
-                    "projected": "Guitar music performance with balanced audio-visual integration. WhisperCLIP architecture maintains generative quality while achieving cross-modal alignment.",
-                    "raw": "A person is playing an acoustic guitar, producing melodic sounds through string vibration. The raw encoding preserves the full linguistic and acoustic richness."
-                }
-            },
-            "2": {
-                "imagebind": {
-                    "projected": "Natural outdoor environment with bird sounds and wind. Projected alignment enhances environmental audio-visual correspondence for improved scene understanding.",
-                    "raw": "Birds chirping in a natural environment with wind sounds. Raw encoding maintains authentic environmental audio characteristics."
-                },
-                "audioclip": {
-                    "projected": "Outdoor scene with natural bird calls and environmental sounds. Enhanced cross-modal alignment improves scene retrieval accuracy.",
-                    "raw": "Natural environment with bird vocalizations and ambient sounds. Raw features preserve full acoustic detail without visual projection."
-                },
-                "clap": {
-                    "projected": "Natural soundscape with bird songs and wind through trees. Text-supervised alignment maintains descriptive quality while improving retrieval.",
-                    "raw": "Birds singing in their natural habitat with gentle wind sounds. Raw encoding preserves authentic environmental audio without compression."
-                },
-                "wav2clip": {
-                    "projected": "Environmental scene with avian sounds and natural ambiance. Projected features show strong audio-visual scene correspondence.",
-                    "raw": "Natural bird sounds in outdoor environment. Raw audio encoding maintains original environmental sound characteristics."
-                },
-                "whisper": {
-                    "projected": "Natural environment with bird calls and wind sounds. Balanced encoding maintains both retrieval performance and generative quality.",
-                    "raw": "Birds are singing in a peaceful natural environment with gentle wind sounds creating a serene atmosphere."
-                }
-            },
-            "3": {
-                "imagebind": {
-                    "projected": "Urban street scene with traffic sounds and pedestrian activity. Projected alignment enhances understanding of complex urban audio-visual relationships.",
-                    "raw": "City street with vehicles and pedestrian sounds. Raw encoding preserves the full complexity of urban acoustic environments."
-                },
-                "audioclip": {
-                    "projected": "Busy urban environment with car engines and street noise. Cross-modal alignment improves scene recognition through audio-visual integration.",
-                    "raw": "Urban street scene with traffic and ambient city sounds. Raw features maintain authentic urban acoustic characteristics."
-                },
-                "clap": {
-                    "projected": "City street with vehicular traffic and urban activity. Text-supervised encoding balances descriptive accuracy with retrieval performance.",
-                    "raw": "Urban environment with car sounds and street activity. Raw encoding preserves rich linguistic descriptions of city soundscapes."
-                },
-                "wav2clip": {
-                    "projected": "Street scene with traffic flow and urban ambiance. Projected features demonstrate improved audio-visual scene correspondence.",
-                    "raw": "City street with vehicle sounds and pedestrian activity. Raw audio maintains original urban sound complexity."
-                },
-                "whisper": {
-                    "projected": "Urban street environment with traffic and city sounds. WhisperCLIP maintains generative quality while achieving effective alignment.",
-                    "raw": "This is a busy city street with cars driving by and various urban sounds creating a typical metropolitan atmosphere."
-                }
-            }
-        };
+    "1": {
+        "audioclip": {
+            "raw": "The main object that is sounding in this image is a large, rectangular sign with rounded corners. The sign is primarily in a shade of blue and features yellow text. The text reads \"INDISPENSIA\" in large letters at the top of the sign, followed by smaller text that is not fully legible due to the angle and distance from the camera.\n\nThe sign appears to be mounted on a wall, and the image captures the sound of the sign as it is being struck or hit. The sound is a loud, hollow, and somewhat reverberant resonance that is characteristic of a heavy object striking a solid surface. The sound is amplified by the enclosed space of the room, contributing to a sense of a deep, echoing sound. The specific type of object that is hitting the sign is not visible in the image, and it is not possible to determine the material of the sign or the nature of the sound beyond what has been described.",
+            "projected": "The image shows a sign with the text \"INDIGO\" in large, bold letters, followed by the word \"WASHINGTON\" in smaller letters. The sign is designed to look like an orange construction barrel, with a yellow background and the letters in a contrasting color. The sound emitted by the sign is a high-pitched, electronic beeping, which is likely a security alarm or a system alert sound. The specifics of the sound are not entirely clear from the image, but it appears to be a digital or electronic sound.",
+        },
+        "clap": {
+            "raw": "The main object in the image is a clock. The clock appears to be a traditional analog clock with a visible face and hands. It is not possible to hear the sound of the clock from the image, but one can infer that it produces the typical ticking sound that is characteristic of an analog clock mechanism. This sound is usually a combination of a low-pitched ticking on the hour and a higher-pitched ticking on the quarter-hour. The ticking sound is generally soft and can be described as a series of metallic or mechanical clicks.",
+            "projected": "The image shows a handbell with a clapper. The clapper, which is the part of the bell that strikes the main body of the bell to produce sound, is in the process of being struck by hand. When the clapper is struck, it usually produces a clear and sharp ringing sound. This type of bell is often used in various ceremonies, events, or religious practices for its ability to produce a loud and distinct sound that can be heard by a large audience. The sound produced by the bell in this image would likely be a crisp and resonant ring, possibly with a slight reverberation due to the acoustics of the space where the bell is being struck.",
+        },
+        "wav2clip": {
+            "raw": "In the image, the main object that is sounding is a stringed musical instrument. It appears to be an acoustic guitar, which is a type of guitar that produces sound by the vibration of strings when the guitar is played. The sound produced by the guitar is a combination of various frequencies that create a musical melody when the strings are struck by the guitarist's fingers or a pick. The guitar's sound can vary depending on the type of wood used in its construction, the tension of the strings, and the guitarist's technique and style of playing. The guitar in the image is captured mid-play, with the player's fingers visible on the fretboard, suggesting that a particular note is being played.",
+            "projected": "The image shows a man who appears to be a chef or cook, as indicated by his attire and the setting, which looks like a professional kitchen environment. However, there is no sound coming directly from the man or any specific object in the image.\n\nThe man is focused on a task, possibly preparing or cooking food, and it is not possible to determine the exact sound that might be associated with his actions without additional context or a clearer view of his actions.\n\nIt is also worth noting that, without further information, it is difficult to provide a detailed description of the sound associated with the man's actions or the specific object he might be interacting with. If you have any more context or specific elements in the image that you would like me to comment on, please let me know.",
+        },
+        "whisper": {
+            "raw": "In this image, the main object that is sounding is a set of chimes. The chimes appear to be made of metal, with a shiny, reflective surface. They are hanging from a central rod or bar, which is supported by a wooden structure. The chimes are designed to produce a musical sound when struck or pulled.\n\nWhen the chimes are played, they produce a series of distinct, ringing tones that can be heard throughout the room. Each chime has a unique pitch and timbre, with some having a higher, more treble-like sound, while others have a lower, more bass-like tone. The chimes produce a soft, gentle sound that is pleasing to the ear and creates a peaceful, calming atmosphere. The sound of the chimes is delicate and airy, with a harmonic quality that can evoke a sense of tranquility and relaxation.",
+            "projected": "The object in the image is a set of bagpipes. The bagpipes are made up of several parts including a bag, drones, and chanter. The bag is a large leather pouch that inflates when blown into by the player. The drones are two long pipes that play the low notes, and the chanter is a shorter pipe with finger holes that play the melody. The sound produced by the bagpipes is a haunting, mournful melody that is often associated with funerals or memorial events. It has a unique and distinct sound that is easily recognizable.",
+        },
+        "imagebind": {
+            "raw": "In the image, there is a white cat in the foreground. The cat appears to be facing the camera with a curious or attentive expression. The cat's fur is mostly white with some darker spots, and it has a small black nose and two small black eyes. The cat's ears are perked up, which might indicate that it is listening to something or reacting to a sound in its environment, but the exact sound is not audible in the image. The cat's tail is hanging straight down, and it looks like it has a little bit of fluffiness on its hind legs. The cat's ears are facing forward, and its whiskers can be seen extending from its face. The image does not provide enough detail to make out any specific sounds the cat might be making, but it seems to be in a calm and relaxed state. The background of the image is not clearly visible due to the focus on the cat.",
+            "projected": "The image appears to show a machine or device, possibly a mechanical part of a larger system, that is emitting a sound. Due to limitations in the image's angle and quality, I am unable to provide a detailed description of the object or its specific sound. However, the sound emitted by the object could be a hum, a whir, a clicking noise, or a series of tones, among other possibilities. The exact nature of the sound or the object itself would require a closer examination or additional context.",
+        },
+    },
+    "2": {
+        "audioclip": {
+            "raw": "The image you've provided is not clear enough to discern any specific object or its sound. The image is blurry and lacks detail, which makes it impossible to identify any distinct item or hear its sound. If you could provide a clearer image or describe the object and its sound in more detail, I'd be happy to help you further!",
+            "projected": "The image shows a bell with a visible clapper at one end, which is the object that is likely to produce sound when struck. The bell has a smooth, metallic surface and appears to be of a traditional design, possibly used in a bell tower, church, or other similar setting. When struck, the clapper would vibrate against the inside of the bell, producing a resonating sound that can vary in tone and volume depending on the size and thickness of the bell, as well as the technique used to strike it. The sound would typically be a deep, hollow, and reverberating tone that can carry and resonate within a space.",
+        },
+        "clap": {
+            "raw": "The main object that is sounding in this image is a guitar. The guitar appears to be a red electric guitar with a pickguard visible. As for the sound, it sounds like a guitar is playing a melody or rhythm. The specific sound of the guitar is difficult to identify without additional context or a clearer view of the guitar's position and angle. The sound of the guitar can vary depending on the type of guitar, the type of strings used, and the playing technique of the person playing it.",
+            "projected": "The image depicts a musical instrument known as a \"vibraphone.\" The vibraphone is a percussion instrument that consists of a series of metal bars, known as \"tubes,\" which are arranged in a circular pattern and are struck with a mallet. Each tube can produce a unique pitch, and the mallet can be struck against the tubes in various ways to create a wide range of musical tones and rhythms. The vibraphone in the image is likely being struck to create a sound, which would be a combination of pitched notes and a metallic resonance from the tubes.",
+        },
+        "wav2clip": {
+            "raw": "The main object in the image is a clock, which is sounding with a bell-like chime. The clock has a simple design with a white face, black numbers, and black hands. The bell-like chime it produces is a clear, metallic sound that is steady and rhythmic. The frequency of the chimes is not specified in the image, but it appears to be a gentle and melodic sound that is likely to be heard throughout the room or area where the clock is located. The chimes are likely to be used to mark the passage of time, perhaps every hour or quarter hour. The sound of the chimes is likely to be a soothing and familiar sound to anyone who is nearby.",
+            "projected": "The image depicts a mechanical device with a rotating drum or cylinder at the center, which is likely producing sound. The sound produced by this object could be described as a continuous, rhythmic drumbeat or a rotational crank noise, which would change pitch and volume as the drum rotates at varying speeds. The sound could also include the clattering of mechanical parts and the audible airflow created by the spinning drum, resulting in a complex, dynamic sound. The exact nature of the sound would depend on the specific design and composition of the device, as well as the materials used and the speeds at which the various components are moving.",
+        },
+        "whisper": {
+            "raw": "The main object that is sounding in this image is a guitar. The guitar is held horizontally by a person, with the fretboard facing the camera. The guitar appears to be a Fender Stratocaster, which is a type of electric guitar known for its bright, crisp sound. The person playing the guitar is strumming the strings, which produces a rhythmic, melodic sound. The strumming pattern is difficult to discern from the image, but it suggests that the person is playing a song or a riff on the guitar. The sound produced by the guitar is likely to be a combination of the plucking of the strings and the vibration of the strings as they are strummed.",
+            "projected": "The image provided appears to be an abstract or abstracted representation of a sound, rather than a physical object that produces a sound. It is a digital image that likely represents a concept or idea rather than a tangible object. If you have any specific questions about the image or need further clarification, please feel free to ask.",
+        },
+        "imagebind": {
+            "raw": "The main object in this image is a grandfather clock. The clock is an antique piece, featuring a tall, narrow body with a wooden case and a pendulum visible through a glass door on the front. The clock has a large white face with black Roman numerals marking the hours, and it has black hands that indicate the time, with the longer hand pointing to the hour and the shorter hand pointing to the minute.\n\nThe sound of the grandfather clock is a soft, rhythmic ticking noise that can be heard as the pendulum swings back and forth inside the clock. The sound is steady and regular, providing a soothing and calming effect on the listener. The ticking noise is a characteristic sound of all pendulum-driven clocks and is often associated with a sense of timelessness and tradition.",
+            "projected": "The main object in the image appears to be a bell. However, I am unable to hear sounds or provide details about the sound of the bell in the image. I can only describe what is visible in the image. The bell is metallic and round with a pointed top and a handle, which is typical of bells used for ringing. Bells are often used to produce a bell-like sound, but the sound produced by a bell depends on its size, shape, and material, as well as the way it is rung. The sound of a bell can range from a low, deep tone to a high, piercing pitch.",
+        },
+    },
+    "3": {
+        "audioclip": {
+            "raw": "The image shows a tall, slender object known as a bell. The bell appears to be made of a metal with a shiny surface, reflecting the light. It has a narrow, conical neck with a wider, flared mouth at the top. The sound emitted by the bell is likely a ringing sound, which would be a series of vibrations set up by the movement of the air inside the bell as it is struck. This sound would decay over time, with the vibrations gradually dissipating until the bell is silent. The specific tone or pitch of the sound would depend on the size, material, and construction of the bell.",
+            "projected": "In the image you provided, there is an object that appears to be a bell. The bell is made of metal and has a round, cylindrical shape with a flared top. It has a handle on one side, which is used to strike the bell to produce a sound. The sound produced by the bell is a ringing tone, which is a result of the metal vibrating when struck. The exact pitch of the sound would depend on the size and material of the bell, but generally, the larger and heavier the bell, the lower the pitch of the sound. The sound is often used in various cultural contexts to signal the start or end of a workday, to mark the hours, or to call people to gather for a meeting or event.",
+        },
+        "clap": {
+            "raw": "The main object in the image is a bell. This bell is designed with a series of openings, presumably to control the pitch and tone of the sound it produces. The bell is hanging on a stand or a mount that allows it to be suspended in the air, as indicated by its support structure.\n\nWhen the bell is struck or tapped, a sound is produced due to the vibration of the metal within the bell chamber. The specific characteristics of the sound, such as pitch, tone, and duration, depend on the size, shape, and material of the bell, as well as the way it is struck.\n\nThe sound produced by the bell in this image would be expected to be a distinct and clear tone, with several overtones that give it a complex and resonant quality. The sound would typically be heard as a distinct ringing, with a series of harmonics that decay in pitch over time. The exact characteristics of the sound would depend on the specific details of the bell's design and the materials used in its construction.",
+            "projected": "The main object in the image is a church bell. The bell is hanging from a tower and is made of metal, likely bronze or iron. The bell is designed to be rung by a clapper, which is a large piece of metal that strikes the bell when it is swung. The sound produced by the bell is a deep, resonant tone that can be heard from a distance. The bell's sound is likely to be a mixture of high and low frequencies, with the high frequencies being produced by the vibration of the bell's surface and the low frequencies being produced by the vibration of the air inside the bell. The bell's sound is also likely to be amplified by the tower it is hanging from, which would help to carry the sound over a greater distance.",
+        },
+        "wav2clip": {
+            "raw": "The main object in this image is a large bell. The bell is made of metal and has a rough, textured surface, suggesting it might be made of a material like bronze or copper. It appears to be quite old, as evidenced by the patina on its surface, which is a natural darkening that occurs over time due to oxidation. The bell has a wide, flared mouth, which allows it to produce a resonant sound when struck or swung. The sound produced by the bell is likely a deep, rich resonance that can be felt as much as heard, particularly when the bell is swung with force. The sound waves produced by the bell are likely to be complex and harmonically rich, as the metal material can produce a wide range of overtones and harmonics when struck.",
+            "projected": "The image shows a waterfall, which is a natural phenomenon where water cascades down a slope. The sound produced by a waterfall is typically a soothing and continuous noise that can vary in tone and pitch depending on the velocity of the water and the shape of the waterfall. In this image, the waterfall appears to be flowing gently, which would likely produce a lower-pitched, steady sound, possibly with some variation in volume due to the water's movement and the ambient noise in the environment. The sound of a waterfall can be both calming and energizing, and it is often used as a natural background sound in music, meditation, and other relaxation and wellness practices.",
+        },
+        "whisper": {
+            "raw": "The main object in the image that is sounding is a bell. The bell appears to be made of metal, possibly bronze or brass, and has a thick, circular shape with a narrow opening in the center. The sound produced by the bell is a deep, resonant ring that resonates and fades away over time. The tone of the bell is rich and full, suggesting that it is well-crafted and likely made with skilled metalworking techniques. The bell's design and the sound it produces suggest that it may be used for signaling or calling attention in a religious or ceremonial context.",
+            "projected": "The image shows a burgundy-colored wine glass with liquid and bubbles inside it. The glass is filled with a golden-colored liquid, which appears to be champagne or a sparkling wine, given the effervescence visible at the top. The sound from the wine glass is most likely the noise of the effervescence, which includes the popping of the bubbles as they rise to the surface and the gentle, rhythmic sound of the liquid being disturbed by the bubbles. The glass is placed on a surface that seems to be a table or counter, suggesting that the scene might be set in a social gathering or a celebration where such drinks are commonly served.",
+        },
+        "imagebind": {
+            "raw": "The main object that is sounding in this image appears to be the wind. The wind is causing a gentle rustling sound as it passes through the leaves of the tree, which adds a soothing background noise to the image. The leaves in the foreground are slightly blurred, suggesting they are in sharp contrast to the stillness of the building in the background. The building itself is architecturally interesting, with a flat roof and a row of windows, which contribute to the overall composition of the image. The contrast between the dynamic movement of the wind and the static structure of the building creates a sense of harmony and balance.",
+            "projected": "The main object in the image appears to be a bell. The sound of the bell is likely a clear, resonant ringing, which can produce a variety of overtones, depending on the size, shape, and material of the bell. Bell sounds can also vary depending on the angle at which the bell is struck and the speed at which the bell is swung. In this image, it's not possible to provide a detailed description of the bell's sound without actually hearing it. However, bell sounds are often associated with a rich, harmonious sound that can evoke a sense of calm or reverence, depending on the context in which the bell is used.",
+        },
+    },
+    "4": {
+        "audioclip": {
+            "raw": "The image appears to be a still from a video, possibly capturing a moment of a musical performance. The main object that is sounding in this image is a musical instrument, specifically a stringed instrument, which seems to be a lute or a similar type of guitar with a long neck and a round body, likely made of wood.\n\nIn the image, the instrument is being played, and the strings vibrate due to the tension caused by the fingers pressing down on the frets. The sound produced by this vibration of the strings is likely a series of pitches, each corresponding to a specific position of the fingers on the fretboard. The pitch of the sound can be affected by various factors, such as the type of wood, the tension of the strings, and the skill of the player.\n\nThe image is slightly blurred, and the camera angle is such that the focus is on the hands of the player, who appears to be strumming the strings with a pick or a similar object. The hands are positioned over the fretboard, indicating that chords or melodies are being played on the instrument.\n\nWithout further context or information, it is difficult to provide a more detailed description of the sound being produced in this image, but the basic mechanism of the instrument and the actions of the player suggest that a musical sound is being created.",
+            "projected": "The main object in the image is a pair of scissors. They have a metallic body with a black handle. When the scissors are rubbed against each other, they make a sound that can be described as a soft, metallic clicking noise. The sound is not loud or jarring but rather a gentle, rhythmic clicking that is characteristic of the motion of scissors. This sound is a result of the blades coming together with a slight squeaking or clacking noise as they interlock.",
+        },
+        "clap": {
+            "raw": "The main object in the image is a blender. A blender is a kitchen appliance designed to mix, puree, or emulsify food and other substances. It typically consists of a round container with a lid, a blending blade assembly, and a base with a motor and switches. When the blender is turned on, it creates a loud, constant, and high-pitched noise that is characteristic of its operation. This sound is produced by the spinning blades as they whirl around the container, breaking up and mixing the ingredients. The sound is typically loud and vibrant, indicating that the blender is functioning efficiently and effectively.",
+            "projected": "The image shows a close-up view of a metallic object that appears to be a bell, but it is not actual sound that is being produced. Instead, there is a visual representation of sound waves, which are typically depicted as concentric circles emanating from the source of the sound. In this case, the sound waves are emanating from the bell itself. The object is a traditional looking bell with a rounded top and a flared opening at the bottom. The sound waves are depicted as a series of circles that increase in size from the center of the image outward, suggesting a bell that is producing a round, full-bodied sound. The image is a visual representation of sound, not an actual sound, and it does not provide any information about the specific tone or pitch of the bell's sound.",
+        },
+        "wav2clip": {
+            "raw": "The image appears to be a still frame from a video, likely displaying the sound of a person clapping. The clapping sound is short, sharp, and consists of two distinct hand movements, with each hand slapping against the other to create a rhythmic, percussive sound. The exact frequency of the sound is not possible to determine from a single image without additional context.",
+            "projected": "The main object in the image is a pair of scissors. The scissors have a metallic sheen with a shiny silver blade on the left side and a silver-colored finger hole on the right side. When the scissors are closed, there is a slight sound of metal on metal, but no harsh or loud noises are being made in the image. The sound is more of a soft, muted clicking noise when the scissors are closed, as the blades gently touch each other. The scissors appear to be well-maintained with no signs of rust or sharpness.",
+        },
+        "whisper": {
+            "raw": "The main object sounding in this image appears to be a large metal pot. The pot is placed on a surface that looks like a stove or cooktop, indicated by the burner visible beneath it. The pot itself is quite large, taking up most of the frame, and it is made of a reflective metal that likely conducts heat well.\n\nAs for the sound it is making, it's not possible to discern the exact frequency or pitch of the sound from the image alone. However, we can infer that the sound is likely produced by the pot being heated on the burner. As the pot heats up, it might produce a hissing or sizzling sound as the water or liquid inside it boils and evaporates. The exact sound would depend on the temperature of the burner and the amount of water or food in the pot.",
+            "projected": "The main object in the image is a pair of scissors. The scissors have two blades that are connected by a pivot point, allowing them to cut materials. The sound produced by the scissors when they are used is a sharp metallic \"snip\" noise, which occurs when the blades meet and cut through the material. This sound is typically associated with the act of cutting or trimming.",
+        },
+        "imagebind": {
+            "raw": "The main object in the image appears to be a metal pot with a lid. The sound emanating from the pot is a bell-like ringing, indicating that the pot is made of a material that produces a clear, resonant sound when struck or moved. The sound is quite distinct and metallic, with a vibration that lingers in the air after the initial ringing has subsided. The specific pitch and tone of the sound depend on the size and shape of the pot, as well as the material it is made from, which seems to be a lightweight metal, possibly aluminum or steel. The sound is quite rhythmic and consistent, suggesting that the pot is well-tuned and resonates harmoniously.",
+            "projected": "The main object in the image is a bell. The bell appears to be made of metal, as it has a smooth and reflective surface. Its shape is conical, tapering towards the top. The sound produced by the bell is described as a ringing, which suggests that the bell's surface vibrates when the bell is struck, causing the air to vibrate in a way that produces a ringing sound. The sound is likely to be a single note, possibly with a slight reverberation depending on the surrounding environment. The pitch of the sound depends on the size and material of the bell, as well as on the way it is struck. The sound is a result of the bell's vibrations being transferred to the air through the process of resonance.",
+        },
+    },
+    "5": {
+        "audioclip": {
+            "raw": "In the image, there is a large mechanical clock with a pendulum visible at the bottom. The clock has a white face with black numbers and hands. The sound produced by the clock is the ticking of the pendulum, which is a rhythmic and steady sound, typically heard once per second, as the pendulum swings back and forth, marking the passage of time. The clock hands are also moving, indicating the time as 11:10, which is a time when the clock's minute hand is on the number 11 and the hour hand is on the number 10. The clock is placed against a background that is blurred and not in focus, which puts the emphasis on the clock itself.",
+            "projected": "The image shows a person standing in front of a guitar. The guitar appears to be an acoustic guitar with a visible sound hole and a pickguard. The person is not playing the guitar, so there would be no sound coming from the guitar in this image. The image does not provide any information about the sound the guitar might produce when played or the particular type of sound that could be produced by the guitar.",
+        },
+        "clap": {
+            "raw": "In the image provided, the main object that is making a sound is a guitar. It appears to be an electric guitar, given its design and the context of the sound being made. The sound being produced by the guitar seems to be a strumming or picking motion, which is a common way to play the guitar. The specific type of sound, such as the type of guitar and the technique being used, cannot be determined from the image alone. However, the sound is likely to be a series of notes or chords, depending on the melody or harmony being played. The sound is not distinct enough to make out any specific song or melody being played.",
+            "projected": "There is no main object that is sounding in this image. The image shows a person's hand and forearm, which appears to be holding a bottle of water. The bottle has a cap on top, which is likely to make a clicking sound when it is opened. The person is also wearing a watch on their left wrist, which may make a slight ticking or buzzing sound as the seconds pass. However, no sound is actually being produced in this image, as the image is a still photo and not a recording of sound.",
+        },
+        "wav2clip": {
+            "raw": "In the image, there is a person playing a string instrument that is producing a musical sound. The string instrument being played appears to be a guitar, judging by the shape and size of the instrument. The guitar has a visible f-hole on the top side, and a sound hole on the back side, which are common characteristics of acoustic guitars. The person is strumming the strings with their fingers, causing the strings to vibrate and produce sound. The sound produced by the guitar is likely to be a combination of various pitches, depending on the way the strings are being played, which create a melodic and rhythmic musical output. The guitar's sound is likely to be rich and resonating, with a blend of frequencies that make up the overall tone of the instrument.",
+            "projected": "In the image provided, there are no objects that are sounding. The image appears to show a person sitting in a room, but without any clear indication of the person's actions or the presence of a sounding object, it's difficult to determine what object is producing sound. If you have any additional information or context about the image or the sound you are hearing, please provide it, and I'll do my best to assist you.",
+        },
+        "whisper": {
+            "raw": "The main object in the image that's making a sound is an electric guitar. The guitar has a black body with a glossy finish. It has six strings and is equipped with pickups, which are the devices that convert the vibration of the guitar's strings into an electrical signal. This signal is then amplified by an amplifier and sent to speakers, which produces the sound. The guitar in the image appears to be an electric guitar with a pickguard, which is a protective plate on the body of the guitar that shields the guitar from damage caused by the strings. The strings are attached to the guitar's headstock, which is located at the top of the guitar's neck, and they are tuned to specific pitches so that the guitarist can play different notes by pressing down on the strings. The guitar is being played by someone, and the sound that it's producing is likely a mix of different melodies and chords, depending on the guitarist's skill and the chord progression they are playing.",
+            "projected": "The image shows a person's left hand, which is making a sound. The hand is holding a small, rectangular object with a rounded corner, which appears to be a small bell or chime. The bell is metallic and is being shaken or struck, causing it to produce a ringing sound that is likely metallic and resonant. The sound is likely to be high-pitched due to the size of the bell. The bell is the main object that is sounding in the image.",
+        },
+        "imagebind": {
+            "raw": "The main object in this image is a guitar, and it is sounding the note E4, which is also known as the musical note \"E.\" The guitar's sound is a clear, distinct ring, with a bright and crisp tone. The guitar appears to be well-maintained, with a glossy finish on the body. The fretboard is visible, and the strings are in good condition, indicating that the guitar is likely to be in good playing condition. The guitar is being played by a person whose hands are partially visible, suggesting that they are likely strumming or picking the strings to produce the E4 note.",
+            "projected": "In the image provided, there is a person holding a bell. The bell appears to be made of metal, with a smooth, reflective surface. It has a clapper inside, which is the part that strikes the sides of the bell when it's rung, creating the sound. The sound of a bell is typically a resonant, hollow, and sometimes melodic ringing, which is produced when the clapper vibrates against the bell's sides. The sound can vary in tone and volume depending on the size, thickness, and material of the bell, as well as the technique used to strike it.",
+        },
+    },
+    "6": {
+        "audioclip": {
+            "raw": "The main object in the image appears to be a mechanical or electronic device, possibly part of a larger system or machine, with a series of components and wires attached to it. The device has a metallic or industrial look, with visible connectors and what seems to be a speaker or output device.\n\nThe sound produced by this object is not explicitly described, but it is referred to as \"a tone.\" This could refer to a variety of sounds, such as a hum, buzz, beep, or any other continuous or periodic sound that is not necessarily music. The tone could be related to the device's operation or could be an audio output produced by the device itself. Without more information or a clearer view of the device, it is difficult to provide a more precise description of the sound.",
+            "projected": "In the image, the main object that is sounding is a **bell**. The bell is made of metal and has a smooth, polished surface. It appears to be hanging from a string or a rod, as there is a visible point of attachment, likely a bell clapper or a hook. The bell itself is not visible in the image, but based on the context of the image and the sound of the bell, it can be inferred that the bell is a hand bell.\n\nThe sound of the bell is described as a \"ringing sound\". This suggests that the bell is being struck or tapped with a hammer or a stick, causing it to vibrate and produce a ringing sound. The sound of the bell is likely distinct and clear, with a certain amount of reverberation, depending on the size of the bell and the material it is made of. The tone of the sound would be determined by the size, shape, and material of the bell, with larger bells often producing a lower, deeper tone, and smaller bells producing a higher, more treble tone.\n\nOverall, the image depicts a hand bell that is being rung, producing a ringing sound. The bell is a metal object, possibly made of bronze, copper, or a similar metal, and it is hanging from a string or a rod. The sound produced by the bell is distinct, clear, and likely has a certain amount of reverberation, depending on the size and material of the bell.",
+        },
+        "clap": {
+            "raw": "The main object sounding in this image is a bell. The bell appears to be metallic and its surface is smooth with a shiny finish. It has a rounded top and a flat, slightly narrower base that is attached to a clapper, which is the part that actually strikes the bell to produce the sound. The sound produced by the bell is a clear, ringing tone that reverberates and fades as the vibrations from the striking clapper dissipate. The bell's sound is likely to be rich in overtones, which are harmonics that are produced by the bell's shape and material properties, and these overtones give the bell's sound a complex and nuanced timbre.",
+            "projected": "The main object in this image is a clock. The clock has a round face with a series of numerals around the circumference, indicating the hours. It has a white face with black numerals. The clock's hands are black and are pointing to the 12 o'clock position, indicating the time as 12 o'clock. The clock is mounted on a green surface, and there is a small, round, black object to the right of the clock's hands. The object has a hole in the center, suggesting it may be a decorative or functional accessory for the clock, such as a pendulum or a weight. The sound emitted by the clock is likely the ticking of the hands as they move across the face of the clock.",
+        },
+        "wav2clip": {
+            "raw": "Based on the image provided, there is no clear object that is producing a sound. The image shows a blurry scene that appears to be taken from a window or a door, which is not a source of sound. If there is a sound that is present in the image, it is not related to a physical object like the one you are describing.",
+            "projected": "The main object that is sounding in the image is the \"ding dong\" bell. This bell is typically used in schools, churches, and other institutions to signal the start and end of classes, meetings, or events. It produces a distinctive ringing sound, characterized by a series of pitches that produce a metallic resonance. The sound of the bell in this image is clear and distinct, indicating that it is likely made of a metal with a high proportion of iron, such as cast iron or peal and hammer steel. The bell's resonant properties also suggest that it is likely designed to be heard from a distance and is made with attention to sound quality. The sound of the bell is not just a simple clang, but rather a complex series of pitches that create a harmonious and melodic sound.",
+        },
+        "whisper": {
+            "raw": "The image shows a mechanical clock, identifiable by its circular shape, hour and minute hands, and Roman numerals on its face. The clock's second hand is making a ticking sound, which is a characteristic, rhythmic sound produced by the swinging motion of the second hand as it moves around the clock face. The ticking sound is often associated with the passage of time and the regular, steady movement of the clock's hands.",
+            "projected": "The main object in the image is a pair of hands playing a piano. The sound produced by this action would be the notes of a piano, which are the individual pitches of the instrument. The piano's sound can vary greatly depending on the skill of the player, the type of music being played, and the condition of the piano itself. In general, the sound of a piano can be described as a rich, resonant, and dynamic musical instrument that can produce a wide range of volume levels and dynamic expression.",
+        },
+        "imagebind": {
+            "raw": "The image shows a close-up of what appears to be a pair of wooden clogs with rope soles, commonly known as \"getas.\" The clogs are traditionally worn in Japan and other parts of East Asia. The sound made by these clogs is a distinct hollow thud when the wearer's foot strikes the ground, due to the hollow design of the clogs, which is quite different from the usual \"slap\" sound of other types of footwear. The hollow thud is both resonant and rhythmic, and it can be heard when the wearer walks on hard surfaces or floors. This sound is characteristic of getas and is often associated with traditional Japanese culture and aesthetics.",
+            "projected": "The image depicts a scene where a child is playing with a musical instrument. Specifically, the child is holding a small metal object, which appears to be a handbell. Handbells are typically used in music to produce a ringing sound when struck with a mallet or hammer. The sound produced by a handbell is characterized by a clear, metallic ringing that can last for several seconds. The child seems to be either shaking the handbell or striking it with a mallet, causing it to produce this distinctive sound. The sound can be described as bright, high-pitched, and resonant, with a noticeable decay in volume as the ringing progressively fades away. The sound of a handbell can be quite captivating and is often used in various musical genres, including orchestral music and choral singing, to add a sharp and metallic timbre to the ensemble.",
+        },
+    },
+    "7": {
+        "audioclip": {
+            "raw": "The main object in this image is a mechanical keyboard. The keyboard has a series of keys with various symbols and letters on them, which are used to input text and commands into a computer. The keys are arranged in rows and columns, and they are elevated above the surface of the keyboard, allowing the user to press them with their fingers. The sound produced by the keyboard is typically a tactile click or clack when keys are pressed, which can provide feedback to the user indicating that the key has been registered. The exact sound produced may vary depending on the type and manufacturer of the keyboard.",
+            "projected": "The main object that is sounding in this image is a bell. The bell is metallic and has a sturdy, solid construction, suggesting that it's designed to produce a loud and resonant sound when struck. The sound of the bell would likely be a deep, ringing tone that can carry a considerable distance. The exact pitch of the bell would depend on its size, but given its robust appearance, it's likely to produce a lower frequency sound. The bell's precise location within the image is not discernible, but it appears to be in motion, possibly being swung or struck, which is causing it to sound.",
+        },
+        "clap": {
+            "raw": "The image shows a person playing a musical instrument. The main object that is sounding in this image is a guitar. You can tell it's a guitar because of its shape, which resembles a flat, rectangular body with a narrow neck that has frets on it. The person is likely plucking the strings on the guitar to produce sound. The sound of a guitar typically consists of various pitches that can range from deep bass notes to high treble notes, depending on the position of the fingers on the fretboard and the type of strings struck.",
+            "projected": "The main object in the image that is sounding is a bell. The bell is a large, metallic object that is ringing, creating a clear and resonant sound. The sound produced by the bell is a single, continuous pitch that fades as it reverberates through the air. The bell is situated in the center of the image and appears to be made of a heavy metal, possibly bronze or iron, given its dark color and the way it reflects light.",
+        },
+        "wav2clip": {
+            "raw": "The main object that is sounding in this image is a person's voice. However, due to the quality and angle of the image, it is not possible to provide specific details about the voice or the person making the sound. The voice appears to be speaking, but without clearer audio or visual information, it is impossible to describe the sound in detail.",
+            "projected": "The main object in this image appears to be a mechanical part, likely a part of a larger system or machine. It has a metallic structure with various shapes and holes, suggesting it might be a component of a mechanical system, possibly involving fluid flow or movement. The sound it makes is a low-frequency rumble or vibration, which could be due to the movement of the part within a larger machine or system. The sound is not audible in this image, as the photo is a still image and does not capture the audio element.",
+        },
+        "whisper": {
+            "raw": "The image is very blurry and lacks clear details, making it difficult to accurately describe the main object and its sound. The image appears to be taken at a distance or with a camera that was not focused properly. To provide a detailed description, I would need a higher-quality image with clearer details.",
+            "projected": "In the image, there is a musical instrument that is producing a sound. The instrument is a stringed instrument known as a guitar. Specifically, it appears to be an acoustic guitar with a visible sound hole on the top surface. The sound of the guitar is likely characterized by a rich, warm tone with various overtones that give it a full and resonant sound. The guitar is being played, but it is not possible to determine the exact notes being played or the specific style of music from the image alone. The sound of the guitar is a complex blend of different frequencies and harmonics, and it can range from a soft, strummed arpeggio to a powerful, chordal strum, depending on how it is played.",
+        },
+        "imagebind": {
+            "raw": "The main object in the image that is sounding is a set of wind chimes, which are hanging from a rope, likely suspended from a tree or similar structure. The wind chimes are made up of several tubes or tubes with different lengths and thicknesses, creating a variety of notes when the wind blows through them. The specific sound produced by the wind chimes cannot be accurately described without knowledge of the exact materials and construction of the chimes, but generally speaking, wind chimes produce a gentle, musical sound when the wind causes them to vibrate.",
+            "projected": "The main object in the image is a crystal glass filled with water. When the glass is held up to the ear, one can hear the sound of the water inside it. The sound is a gentle, soothing hiss, as if the water is speaking in a soft, calming voice. The clarity and purity of the water's sound are a testament to its quality, indicating that it is clean and free of impurities. The sound of the water can be both relaxing and refreshing, providing a sense of tranquility and rejuvenation.",
+        },
+    },
+};
 
         // Handle encoder mode button clicks
         document.querySelectorAll('.mode-button').forEach(button => {
             button.addEventListener('click', function() {
-                const example = this.dataset.example;
+                const example = this.closest('.demo-example').querySelector('[id^="caption-"]').id.split('-')[1];
                 const encoder = this.dataset.encoder;
                 const mode = this.dataset.mode;
                 
                 // Remove active class from all buttons in this example
-                document.querySelectorAll(`[data-example="${example}"]`).forEach(btn => {
+                this.closest('.encoder-grid').querySelectorAll('.mode-button').forEach(btn => {
                     btn.classList.remove('active');
                 });
                 
@@ -766,9 +1558,14 @@
                 
                 // Update caption
                 const captionEl = document.getElementById(`caption-${example}`);
-                const caption = captionData[example][encoder][mode];
-                captionEl.textContent = caption;
-                captionEl.classList.remove('empty');
+                if (captionData[example] && captionData[example][encoder] && captionData[example][encoder][mode]) {
+                    const caption = captionData[example][encoder][mode];
+                    captionEl.textContent = caption;
+                    captionEl.classList.remove('empty');
+                } else {
+                    captionEl.textContent = 'Description not available for this configuration.';
+                    captionEl.classList.remove('empty');
+                }
             });
         });
 
@@ -784,6 +1581,17 @@
                     });
                 }
             });
+        });
+
+        // Animate score bars on load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.querySelectorAll('.score-fill').forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => { bar.style.width = width; }, 100);
+                });
+            }, 500);
         });
     </script>
 </body>
