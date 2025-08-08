@@ -84,10 +84,5 @@ If you use SoundCLIP or the AVE-2 dataset in your research, please cite our pape
 ```
 
 ## Contact
-For questions about this work, please contact:
-- Ali Vosoughi: [avosough@ur.rochester.edu](mailto:avosough@ur.rochester.edu)
-- Chenliang Xu: [chenliang.xu@rochester.edu](mailto:chenliang.xu@rochester.edu)
+For questions about this work, please contact through email or initiate an issue.
 
----
-Generated: 2025-08-05 05:55:23  
-University of Rochester Computer Science Department
