@@ -206,6 +206,71 @@ Paper: https://arxiv.org/abs/2506.10416
             margin-top: 5px;
         }
 
+        /* ADDED: Dataset usage section styles */
+        .dataset-usage {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .dataset-usage h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            overflow-x: auto;
+            line-height: 1.4;
+        }
+
+        .code-block .comment {
+            color: #75715e;
+        }
+
+        .code-block .keyword {
+            color: #66d9ef;
+        }
+
+        .code-block .string {
+            color: #e6db74;
+        }
+
+        .usage-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .usage-step {
+            background: #f0f8f0;
+            border: 1px solid #c8e6c9;
+            border-radius: 5px;
+            padding: 15px;
+        }
+
+        .usage-step h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .usage-step p {
+            margin: 0;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
         /* Demo Section Specific Styles */
         .demo-container {
             background: #f8f9fa;
@@ -582,6 +647,10 @@ Paper: https://arxiv.org/abs/2506.10416
                 flex-direction: column;
                 gap: 10px;
             }
+
+            .usage-steps {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -598,11 +667,6 @@ Paper: https://arxiv.org/abs/2506.10416
                 <li><a href="#code">Code</a></li>
             </ul>
         </nav>
-        
-        <!-- Live Demo Banner -->
-        <div style="background: #e8f5e8; border: 1px solid #4caf50; padding: 10px; text-align: center; color: #2e7d32; margin: 10px 0; border-radius: 5px;">
-            🌐 <strong>Live Interactive Demo</strong> | 📍 Official Project Page: <a href="https://ali-vosoughi.github.io/SoundCLIP/" style="color: #1976d2; font-weight: bold;">https://ali-vosoughi.github.io/SoundCLIP/</a>
-        </div>
     </header>
 
     <div class="container">
@@ -626,7 +690,8 @@ Paper: https://arxiv.org/abs/2506.10416
             <div class="btn-group">
                 <a href="https://arxiv.org/abs/2506.10416" class="btn btn-primary">📄 Read Paper</a>
                 <a href="https://github.com/ali-vosoughi/SoundCLIP" class="btn">💻 Code</a>
-                <a href="#demo" class="btn">🎬 Interactive Demo</a>
+                <a href="https://huggingface.co/datasets/ali-vosoughi/ave-2" class="btn">🗂️ Dataset</a>
+                <a href="#demo" class="btn">🎬 Demo</a>
                 <a href="#citation" class="btn">📚 Citation</a>
             </div>
         </section>
@@ -640,11 +705,11 @@ Paper: https://arxiv.org/abs/2506.10416
 
         <section id="dataset" class="section">
             <h2>AVE-2 Dataset</h2>
-            <p>We introduce <strong>AudioVisual Event Evaluation (AVE-2)</strong>, a dataset of 580,147 three-second audiovisual clips with fine-grained alignment annotations. Unlike existing datasets that treat alignment as binary, AVE-2 provides detailed alignment scores across five dimensions, enabling systematic investigation of audio-visual correspondence quality.</p>
+            <p>We introduce <strong>AudioVisual Event Evaluation (AVE-2)</strong>, a dataset of 570,138 three-second audiovisual clips with fine-grained alignment annotations. Unlike existing datasets that treat alignment as binary, AVE-2 provides detailed alignment scores across five dimensions, enabling systematic investigation of audio-visual correspondence quality.</p>
 
             <div class="stats">
                 <div class="stat-item">
-                    <span class="stat-number">580K</span>
+                    <span class="stat-number">570K</span>
                     <div class="stat-label">Audio-Visual Clips</div>
                 </div>
                 <div class="stat-item">
@@ -660,6 +725,77 @@ Paper: https://arxiv.org/abs/2506.10416
                     <div class="stat-label">Demo Examples</div>
                 </div>
             </div>
+
+            <!-- ADDED: Dataset usage section -->
+            <div class="dataset-usage">
+                <h3>🚀 Getting Started with AVE-2</h3>
+                <p>AVE-2 is now available on HuggingFace! Get started with our comprehensive dataset in just a few lines of code:</p>
+
+                <div class="usage-steps">
+                    <div class="usage-step">
+                        <h4>📥 Step 1: Basic Loading</h4>
+                        <p>Load the dataset metadata and explore 570K samples with alignment scores instantly.</p>
+                    </div>
+                    <div class="usage-step">
+                        <h4>🎬 Step 2: Download Media</h4>
+                        <p>Download chunked video files (237GB total) for complete audio-visual analysis.</p>
+                    </div>
+                    <div class="usage-step">
+                        <h4>🔍 Step 3: Start Analyzing</h4>
+                        <p>Filter by quality scores, explore alignment dimensions, and build your models.</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+<span class="comment"># Install required packages</span>
+pip install datasets opencv-python librosa
+
+<span class="comment"># Load dataset with metadata (instant)</span>
+<span class="keyword">from</span> datasets <span class="keyword">import</span> load_dataset
+dataset = load_dataset(<span class="string">"ali-vosoughi/ave-2"</span>)
+
+<span class="comment"># Explore a sample</span>
+sample = dataset[<span class="string">"train"</span>][0]
+<span class="keyword">print</span>(<span class="string">f"Video ID: {sample['youtube_id']}"</span>)
+<span class="keyword">print</span>(<span class="string">f"Temporal Alignment: {sample['temporal_alignment_score']}/10"</span>)
+<span class="keyword">print</span>(<span class="string">f"Video Caption: {sample['video_caption'][:100]}..."</span>)
+                </div>
+
+                <div class="code-block">
+<span class="comment"># For complete dataset with video files:</span>
+<span class="comment"># 1. Download media parts</span>
+huggingface-cli download ali-vosoughi/ave-2 --include=<span class="string">"ave2_media_part_*"</span> --local-dir ./
+
+<span class="comment"># 2. Reconstruct media archive</span>
+cat ave2_media_part_* > ave2_media.zip && unzip ave2_media.zip
+
+<span class="comment"># 3. Verify reconstruction</span>
+md5sum -c ave2_media.md5
+
+<span class="comment"># 4. Use with media files</span>
+dataset = load_dataset(<span class="string">"ali-vosoughi/ave-2"</span>)  <span class="comment"># Now includes video paths!</span>
+                </div>
+
+                <div class="code-block">
+<span class="comment"># Quality-aware filtering</span>
+high_quality = dataset.filter(<span class="keyword">lambda</span> x: all([
+    x[<span class="string">'temporal_alignment_score'</span>] >= 8,
+    x[<span class="string">'spatial_coherence_score'</span>] >= 8,
+    x[<span class="string">'physical_causality_score'</span>] >= 8
+]))
+
+<span class="comment"># Analyze invisible sound sources</span>
+invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[<span class="string">'invisible_active_sources'</span>]) > 0)
+<span class="keyword">print</span>(<span class="string">f"Samples with invisible sources: {len(invisible_samples['train'])}"</span>)
+                </div>
+
+                <p><strong>🔗 Dataset Links:</strong></p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><a href="https://huggingface.co/datasets/ali-vosoughi/ave-2" target="_blank">📊 HuggingFace Dataset Page</a></li>
+                    <li><a href="https://huggingface.co/datasets/ali-vosoughi/ave-2/tree/main" target="_blank">📁 Browse Files & Documentation</a></li>
+                    <li><a href="https://github.com/ali-vosoughi/SoundCLIP" target="_blank">💻 GitHub Repository with Examples</a></li>
+                </ul>
+            </div>
         </section>
 
         <section id="demo" class="section">
@@ -670,117 +806,7 @@ Paper: https://arxiv.org/abs/2506.10416
                 
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 1: Cat</div>
-                        <div class="example-meta">
-                            <span class="video-id">Video ID: rvbmYs4Kl3Y (Segment 01)</span>
-                            <span class="score-badge">Alignment Score: 47.0/50</span>
-                        </div>
-                    </div>
-                    
-                    <div class="video-container">
-                        <video class="demo-video" controls preload="metadata">
-                            <source src="videos/rvbmYs4Kl3Y_01.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    
-                    <div class="descriptions-grid">
-                        <div class="description-card">
-                            <h4>Visual Description</h4>
-                            <p>The video takes place in a workshop setting, specifically at Finney's. The background features various tools and materials typically found in woodworking or similar crafts, such as wooden planks, a workbench, and shelves with additional items. There is also signage indicating "Finney's Expert Advice Simple Solutions Beautiful Work" on the wall. In the first scene, an individual wearing glasses and a black shirt with a white apron stands behind a workbench. They are holding a can of paint and appear to be preparing it for use. On the workbench, there is a rectangular piece of wood that looks like a cutting board, along with other tools and materials. A bottle labeled "Paint" is placed nearby, suggesting that painting might be part of their task. The second scene shows the same person continuing to prepare the paint can. This time, they are using their hands to apply the paint onto the cutting board. The environment remains consistent throughout, reinforcing the idea that this is a dedicated workspace for painting tasks. The third scene continues with the individual still engaged in painting. The focus remains on the process of applying the paint, which appears to be a light color given its sheen. The surrounding area includes more tools and materials, maintaining the workshop ambiance. The fourth scene captures another moment where the individual is seen working on the painting process. The lighting seems slightly dimmer than in previous scenes, possibly due to the nature of the work being done. The overall mood remains focused and industrious. The fifth scene returns to the individual standing behind the workbench, now holding a small container that likely contains additional paint or a different type of material. The arrangement of objects and characters suggests a continuation of the painting activity. The final scene shifts to a different angle, showing the individual from a side perspective. The lighting is brighter compared to earlier scenes, emphasizing the ongoing painting activity. The surroundings remain unchanged, reinforcing the continuity of the workshop environment. Overall, the video provides a detailed look into a typical day in a woodworking workshop, focusing on the activities involved in painting.</p>
-                        </div>
-                        <div class="description-card">
-                            <h4>Audio Description</h4>
-                            <p>Labels with acoustic features: Deep, resonant, authoritative, and assertive -> Male speech, man speaking; Characterized by its loudness, pitch, and timbre -> Speech; Generally high frequency, short duration -> Animal</p>
-                        </div>
-                    </div>
-                    
-                    <div class="alignment-scores">
-                        <h4>Alignment Analysis</h4>
-                        <div class="scores-grid">
-                            <div class="score-item">
-                                <div class="score-label">Temporal</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Spatial</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Contextual</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Causality</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 90.0%"></div>
-                                    <span class="score-value">9/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Visibility</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="sound-sources">
-                        <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
-                        <div class="source-item visible-active">
-                            <span class="source-label">👁️ Visible Active:</span>
-                            <span class="source-list">Man, Cutting board, Paint canister</span>
-                        </div>
-                    </div>
-                    
-                    <div class="encoder-grid">
-
-                        <div class="encoder-column">
-                            <div class="encoder-label">AUDIOCLIP</div>
-                            <button class="mode-button" data-encoder="audioclip" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-encoder="audioclip" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">CLAP</div>
-                            <button class="mode-button" data-encoder="clap" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-encoder="clap" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">WAV2CLIP</div>
-                            <button class="mode-button" data-encoder="wav2clip" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">WHISPERCLIP</div>
-                            <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
-                        </div>
-                        <div class="encoder-column">
-                            <div class="encoder-label">IMAGEBIND</div>
-                            <button class="mode-button" data-encoder="imagebind" data-mode="projected">Projected</button>
-                            <button class="mode-button raw" data-encoder="imagebind" data-mode="raw">Raw</button>
-                        </div>
-                    </div>
-                    
-                    <div class="current-selection" id="selection-1">Select an encoder mode to view generated caption</div>
-                    <div class="caption-display empty" id="caption-1">Click any button above to see the generated caption for this audiovisual example.</div>
-                </div>
-            
-                <div class="demo-example">
-                    <div class="example-header">
-                        <div class="example-title">Example 2: Sea Waves</div>
+                        <div class="example-title">Example 1</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: IwqD859w2_E (Segment 02)</span>
                             <span class="score-badge">Alignment Score: 44.0/50</span>
@@ -888,13 +914,123 @@ Paper: https://arxiv.org/abs/2506.10416
                         </div>
                     </div>
                     
+                    <div class="current-selection" id="selection-1">Select an encoder mode to view generated caption</div>
+                    <div class="caption-display empty" id="caption-1">Click any button above to see the generated caption for this audiovisual example.</div>
+                </div>
+            
+                <div class="demo-example">
+                    <div class="example-header">
+                        <div class="example-title">Example 2</div>
+                        <div class="example-meta">
+                            <span class="video-id">Video ID: rvbmYs4Kl3Y (Segment 01)</span>
+                            <span class="score-badge">Alignment Score: 47.0/50</span>
+                        </div>
+                    </div>
+                    
+                    <div class="video-container">
+                        <video class="demo-video" controls preload="metadata">
+                            <source src="videos/rvbmYs4Kl3Y_01.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="descriptions-grid">
+                        <div class="description-card">
+                            <h4>Visual Description</h4>
+                            <p>The video takes place in a workshop setting, specifically at Finney's. The background features various tools and materials typically found in woodworking or similar crafts, such as wooden planks, a workbench, and shelves with additional items. There is also signage indicating "Finney's Expert Advice Simple Solutions Beautiful Work" on the wall. In the first scene, an individual wearing glasses and a black shirt with a white apron stands behind a workbench. They are holding a can of paint and appear to be preparing it for use. On the workbench, there is a rectangular piece of wood that looks like a cutting board, along with other tools and materials. A bottle labeled "Paint" is placed nearby, suggesting that painting might be part of their task. The second scene shows the same person continuing to prepare the paint can. This time, they are using their hands to apply the paint onto the cutting board. The environment remains consistent throughout, reinforcing the idea that this is a dedicated workspace for painting tasks. The third scene continues with the individual still engaged in painting. The focus remains on the process of applying the paint, which appears to be a light color given its sheen. The surrounding area includes more tools and materials, maintaining the workshop ambiance. The fourth scene captures another moment where the individual is seen working on the painting process. The lighting seems slightly dimmer than in previous scenes, possibly due to the nature of the work being done. The overall mood remains focused and industrious. The fifth scene returns to the individual standing behind the workbench, now holding a small container that likely contains additional paint or a different type of material. The arrangement of objects and characters suggests a continuation of the painting activity. The final scene shifts to a different angle, showing the individual from a side perspective. The lighting is brighter compared to earlier scenes, emphasizing the ongoing painting activity. The surroundings remain unchanged, reinforcing the continuity of the workshop environment. Overall, the video provides a detailed look into a typical day in a woodworking workshop, focusing on the activities involved in painting.</p>
+                        </div>
+                        <div class="description-card">
+                            <h4>Audio Description</h4>
+                            <p>Labels with acoustic features: Deep, resonant, authoritative, and assertive -> Male speech, man speaking; Characterized by its loudness, pitch, and timbre -> Speech; Generally high frequency, short duration -> Animal</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alignment-scores">
+                        <h4>Alignment Analysis</h4>
+                        <div class="scores-grid">
+                            <div class="score-item">
+                                <div class="score-label">Temporal</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Spatial</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Contextual</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100.0%"></div>
+                                    <span class="score-value">10/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Causality</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 90.0%"></div>
+                                    <span class="score-value">9/10</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <div class="score-label">Visibility</div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 80.0%"></div>
+                                    <span class="score-value">8/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sound-sources">
+                        <h4>Sound Source Visibility Analysis</h4>
+                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-item visible-active">
+                            <span class="source-label">👁️ Visible Active:</span>
+                            <span class="source-list">Man, Cutting board, Paint canister</span>
+                        </div>
+                    </div>
+                    
+                    <div class="encoder-grid">
+
+                        <div class="encoder-column">
+                            <div class="encoder-label">AUDIOCLIP</div>
+                            <button class="mode-button" data-encoder="audioclip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="audioclip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">CLAP</div>
+                            <button class="mode-button" data-encoder="clap" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="clap" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WAV2CLIP</div>
+                            <button class="mode-button" data-encoder="wav2clip" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">WHISPERCLIP</div>
+                            <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
+                        </div>
+                        <div class="encoder-column">
+                            <div class="encoder-label">IMAGEBIND</div>
+                            <button class="mode-button" data-encoder="imagebind" data-mode="projected">Projected</button>
+                            <button class="mode-button raw" data-encoder="imagebind" data-mode="raw">Raw</button>
+                        </div>
+                    </div>
+                    
                     <div class="current-selection" id="selection-2">Select an encoder mode to view generated caption</div>
                     <div class="caption-display empty" id="caption-2">Click any button above to see the generated caption for this audiovisual example.</div>
                 </div>
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 3: Cat</div>
+                        <div class="example-title">Example 3</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: DDer7K8WG4I (Segment 02)</span>
                             <span class="score-badge">Alignment Score: 46.0/50</span>
@@ -1008,7 +1144,7 @@ Paper: https://arxiv.org/abs/2506.10416
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 4: Cat</div>
+                        <div class="example-title">Example 4</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: UorSpZVnX_M (Segment 02)</span>
                             <span class="score-badge">Alignment Score: 46.0/50</span>
@@ -1122,7 +1258,7 @@ Paper: https://arxiv.org/abs/2506.10416
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 5: Cat</div>
+                        <div class="example-title">Example 5</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: EQHrQIaQNv8 (Segment 03)</span>
                             <span class="score-badge">Alignment Score: 45.0/50</span>
@@ -1236,7 +1372,7 @@ Paper: https://arxiv.org/abs/2506.10416
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 6: Cat</div>
+                        <div class="example-title">Example 6</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: GJhYkfI7jpU (Segment 03)</span>
                             <span class="score-badge">Alignment Score: 42.0/50</span>
@@ -1350,7 +1486,7 @@ Paper: https://arxiv.org/abs/2506.10416
             
                 <div class="demo-example">
                     <div class="example-header">
-                        <div class="example-title">Example 7: Cat</div>
+                        <div class="example-title">Example 7</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: AVL7Kbpw13U (Segment 01)</span>
                             <span class="score-badge">Alignment Score: 42.0/50</span>
@@ -1486,7 +1622,7 @@ Paper: https://arxiv.org/abs/2506.10416
             <div class="btn-group">
                 <a href="https://github.com/ali-vosoughi/SoundCLIP" class="btn btn-primary">GitHub Repository</a>
                 <a href="https://arxiv.org/abs/2506.10416" class="btn">ArXiv Paper</a>
-                <a href="#dataset" class="btn">Download Dataset</a>
+                <a href="https://huggingface.co/datasets/ali-vosoughi/ave-2" class="btn">HuggingFace Dataset</a>
             </div>
         </section>
 
@@ -1519,7 +1655,7 @@ Paper: https://arxiv.org/abs/2506.10416
                     <h4>Resources</h4>
                     <p><a href="https://arxiv.org/abs/2506.10416">ArXiv Paper</a></p>
                     <p><a href="https://github.com/ali-vosoughi/SoundCLIP">GitHub Repository</a></p>
-                    <p><a href="#dataset">AVE-2 Dataset</a></p>
+                    <p><a href="https://huggingface.co/datasets/ali-vosoughi/ave-2">AVE-2 Dataset</a></p>
                 </div>
                 <div class="footer-section">
                     <h4>Institution</h4>
@@ -1535,28 +1671,6 @@ Paper: https://arxiv.org/abs/2506.10416
     <script>
         const captionData = {
     "1": {
-        "audioclip": {
-            "raw": "The main object that is sounding in this image is a large, rectangular sign with rounded corners. The sign is primarily in a shade of blue and features yellow text. The text reads \"INDISPENSIA\" in large letters at the top of the sign, followed by smaller text that is not fully legible due to the angle and distance from the camera.\n\nThe sign appears to be mounted on a wall, and the image captures the sound of the sign as it is being struck or hit. The sound is a loud, hollow, and somewhat reverberant resonance that is characteristic of a heavy object striking a solid surface. The sound is amplified by the enclosed space of the room, contributing to a sense of a deep, echoing sound. The specific type of object that is hitting the sign is not visible in the image, and it is not possible to determine the material of the sign or the nature of the sound beyond what has been described.",
-            "projected": "The image shows a sign with the text \"INDIGO\" in large, bold letters, followed by the word \"WASHINGTON\" in smaller letters. The sign is designed to look like an orange construction barrel, with a yellow background and the letters in a contrasting color. The sound emitted by the sign is a high-pitched, electronic beeping, which is likely a security alarm or a system alert sound. The specifics of the sound are not entirely clear from the image, but it appears to be a digital or electronic sound.",
-        },
-        "clap": {
-            "raw": "The main object in the image is a clock. The clock appears to be a traditional analog clock with a visible face and hands. It is not possible to hear the sound of the clock from the image, but one can infer that it produces the typical ticking sound that is characteristic of an analog clock mechanism. This sound is usually a combination of a low-pitched ticking on the hour and a higher-pitched ticking on the quarter-hour. The ticking sound is generally soft and can be described as a series of metallic or mechanical clicks.",
-            "projected": "The image shows a handbell with a clapper. The clapper, which is the part of the bell that strikes the main body of the bell to produce sound, is in the process of being struck by hand. When the clapper is struck, it usually produces a clear and sharp ringing sound. This type of bell is often used in various ceremonies, events, or religious practices for its ability to produce a loud and distinct sound that can be heard by a large audience. The sound produced by the bell in this image would likely be a crisp and resonant ring, possibly with a slight reverberation due to the acoustics of the space where the bell is being struck.",
-        },
-        "wav2clip": {
-            "raw": "In the image, the main object that is sounding is a stringed musical instrument. It appears to be an acoustic guitar, which is a type of guitar that produces sound by the vibration of strings when the guitar is played. The sound produced by the guitar is a combination of various frequencies that create a musical melody when the strings are struck by the guitarist's fingers or a pick. The guitar's sound can vary depending on the type of wood used in its construction, the tension of the strings, and the guitarist's technique and style of playing. The guitar in the image is captured mid-play, with the player's fingers visible on the fretboard, suggesting that a particular note is being played.",
-            "projected": "The image shows a man who appears to be a chef or cook, as indicated by his attire and the setting, which looks like a professional kitchen environment. However, there is no sound coming directly from the man or any specific object in the image.\n\nThe man is focused on a task, possibly preparing or cooking food, and it is not possible to determine the exact sound that might be associated with his actions without additional context or a clearer view of his actions.\n\nIt is also worth noting that, without further information, it is difficult to provide a detailed description of the sound associated with the man's actions or the specific object he might be interacting with. If you have any more context or specific elements in the image that you would like me to comment on, please let me know.",
-        },
-        "whisper": {
-            "raw": "In this image, the main object that is sounding is a set of chimes. The chimes appear to be made of metal, with a shiny, reflective surface. They are hanging from a central rod or bar, which is supported by a wooden structure. The chimes are designed to produce a musical sound when struck or pulled.\n\nWhen the chimes are played, they produce a series of distinct, ringing tones that can be heard throughout the room. Each chime has a unique pitch and timbre, with some having a higher, more treble-like sound, while others have a lower, more bass-like tone. The chimes produce a soft, gentle sound that is pleasing to the ear and creates a peaceful, calming atmosphere. The sound of the chimes is delicate and airy, with a harmonic quality that can evoke a sense of tranquility and relaxation.",
-            "projected": "The object in the image is a set of bagpipes. The bagpipes are made up of several parts including a bag, drones, and chanter. The bag is a large leather pouch that inflates when blown into by the player. The drones are two long pipes that play the low notes, and the chanter is a shorter pipe with finger holes that play the melody. The sound produced by the bagpipes is a haunting, mournful melody that is often associated with funerals or memorial events. It has a unique and distinct sound that is easily recognizable.",
-        },
-        "imagebind": {
-            "raw": "In the image, there is a white cat in the foreground. The cat appears to be facing the camera with a curious or attentive expression. The cat's fur is mostly white with some darker spots, and it has a small black nose and two small black eyes. The cat's ears are perked up, which might indicate that it is listening to something or reacting to a sound in its environment, but the exact sound is not audible in the image. The cat's tail is hanging straight down, and it looks like it has a little bit of fluffiness on its hind legs. The cat's ears are facing forward, and its whiskers can be seen extending from its face. The image does not provide enough detail to make out any specific sounds the cat might be making, but it seems to be in a calm and relaxed state. The background of the image is not clearly visible due to the focus on the cat.",
-            "projected": "The image appears to show a machine or device, possibly a mechanical part of a larger system, that is emitting a sound. Due to limitations in the image's angle and quality, I am unable to provide a detailed description of the object or its specific sound. However, the sound emitted by the object could be a hum, a whir, a clicking noise, or a series of tones, among other possibilities. The exact nature of the sound or the object itself would require a closer examination or additional context.",
-        },
-    },
-    "2": {
         "audioclip": {
             "raw": "The image you've provided is not clear enough to discern any specific object or its sound. The image is blurry and lacks detail, which makes it impossible to identify any distinct item or hear its sound. If you could provide a clearer image or describe the object and its sound in more detail, I'd be happy to help you further!",
             "projected": "The image shows a bell with a visible clapper at one end, which is the object that is likely to produce sound when struck. The bell has a smooth, metallic surface and appears to be of a traditional design, possibly used in a bell tower, church, or other similar setting. When struck, the clapper would vibrate against the inside of the bell, producing a resonating sound that can vary in tone and volume depending on the size and thickness of the bell, as well as the technique used to strike it. The sound would typically be a deep, hollow, and reverberating tone that can carry and resonate within a space.",
@@ -1576,6 +1690,28 @@ Paper: https://arxiv.org/abs/2506.10416
         "imagebind": {
             "raw": "The main object in this image is a grandfather clock. The clock is an antique piece, featuring a tall, narrow body with a wooden case and a pendulum visible through a glass door on the front. The clock has a large white face with black Roman numerals marking the hours, and it has black hands that indicate the time, with the longer hand pointing to the hour and the shorter hand pointing to the minute.\n\nThe sound of the grandfather clock is a soft, rhythmic ticking noise that can be heard as the pendulum swings back and forth inside the clock. The sound is steady and regular, providing a soothing and calming effect on the listener. The ticking noise is a characteristic sound of all pendulum-driven clocks and is often associated with a sense of timelessness and tradition.",
             "projected": "The main object in the image appears to be a bell. However, I am unable to hear sounds or provide details about the sound of the bell in the image. I can only describe what is visible in the image. The bell is metallic and round with a pointed top and a handle, which is typical of bells used for ringing. Bells are often used to produce a bell-like sound, but the sound produced by a bell depends on its size, shape, and material, as well as the way it is rung. The sound of a bell can range from a low, deep tone to a high, piercing pitch.",
+        },
+    },
+    "2": {
+        "audioclip": {
+            "raw": "The main object that is sounding in this image is a large, rectangular sign with rounded corners. The sign is primarily in a shade of blue and features yellow text. The text reads \"INDISPENSIA\" in large letters at the top of the sign, followed by smaller text that is not fully legible due to the angle and distance from the camera.\n\nThe sign appears to be mounted on a wall, and the image captures the sound of the sign as it is being struck or hit. The sound is a loud, hollow, and somewhat reverberant resonance that is characteristic of a heavy object striking a solid surface. The sound is amplified by the enclosed space of the room, contributing to a sense of a deep, echoing sound. The specific type of object that is hitting the sign is not visible in the image, and it is not possible to determine the material of the sign or the nature of the sound beyond what has been described.",
+            "projected": "The image shows a sign with the text \"INDIGO\" in large, bold letters, followed by the word \"WASHINGTON\" in smaller letters. The sign is designed to look like an orange construction barrel, with a yellow background and the letters in a contrasting color. The sound emitted by the sign is a high-pitched, electronic beeping, which is likely a security alarm or a system alert sound. The specifics of the sound are not entirely clear from the image, but it appears to be a digital or electronic sound.",
+        },
+        "clap": {
+            "raw": "The main object in the image is a clock. The clock appears to be a traditional analog clock with a visible face and hands. It is not possible to hear the sound of the clock from the image, but one can infer that it produces the typical ticking sound that is characteristic of an analog clock mechanism. This sound is usually a combination of a low-pitched ticking on the hour and a higher-pitched ticking on the quarter-hour. The ticking sound is generally soft and can be described as a series of metallic or mechanical clicks.",
+            "projected": "The image shows a handbell with a clapper. The clapper, which is the part of the bell that strikes the main body of the bell to produce sound, is in the process of being struck by hand. When the clapper is struck, it usually produces a clear and sharp ringing sound. This type of bell is often used in various ceremonies, events, or religious practices for its ability to produce a loud and distinct sound that can be heard by a large audience. The sound produced by the bell in this image would likely be a crisp and resonant ring, possibly with a slight reverberation due to the acoustics of the space where the bell is being struck.",
+        },
+        "wav2clip": {
+            "raw": "In the image, the main object that is sounding is a stringed musical instrument. It appears to be an acoustic guitar, which is a type of guitar that produces sound by the vibration of strings when the guitar is played. The sound produced by the guitar is a combination of various frequencies that create a musical melody when the strings are struck by the guitarist's fingers or a pick. The guitar's sound can vary depending on the type of wood used in its construction, the tension of the strings, and the guitarist's technique and style of playing. The guitar in the image is captured mid-play, with the player's fingers visible on the fretboard, suggesting that a particular note is being played.",
+            "projected": "The image shows a man who appears to be a chef or cook, as indicated by his attire and the setting, which looks like a professional kitchen environment. However, there is no sound coming directly from the man or any specific object in the image.\n\nThe man is focused on a task, possibly preparing or cooking food, and it is not possible to determine the exact sound that might be associated with his actions without additional context or a clearer view of his actions.\n\nIt is also worth noting that, without further information, it is difficult to provide a detailed description of the sound associated with the man's actions or the specific object he might be interacting with. If you have any more context or specific elements in the image that you would like me to comment on, please let me know.",
+        },
+        "whisper": {
+            "raw": "In this image, the main object that is sounding is a set of chimes. The chimes appear to be made of metal, with a shiny, reflective surface. They are hanging from a central rod or bar, which is supported by a wooden structure. The chimes are designed to produce a musical sound when struck or pulled.\n\nWhen the chimes are played, they produce a series of distinct, ringing tones that can be heard throughout the room. Each chime has a unique pitch and timbre, with some having a higher, more treble-like sound, while others have a lower, more bass-like tone. The chimes produce a soft, gentle sound that is pleasing to the ear and creates a peaceful, calming atmosphere. The sound of the chimes is delicate and airy, with a harmonic quality that can evoke a sense of tranquility and relaxation.",
+            "projected": "The object in the image is a set of bagpipes. The bagpipes are made up of several parts including a bag, drones, and chanter. The bag is a large leather pouch that inflates when blown into by the player. The drones are two long pipes that play the low notes, and the chanter is a shorter pipe with finger holes that play the melody. The sound produced by the bagpipes is a haunting, mournful melody that is often associated with funerals or memorial events. It has a unique and distinct sound that is easily recognizable.",
+        },
+        "imagebind": {
+            "raw": "In the image, there is a white cat in the foreground. The cat appears to be facing the camera with a curious or attentive expression. The cat's fur is mostly white with some darker spots, and it has a small black nose and two small black eyes. The cat's ears are perked up, which might indicate that it is listening to something or reacting to a sound in its environment, but the exact sound is not audible in the image. The cat's tail is hanging straight down, and it looks like it has a little bit of fluffiness on its hind legs. The cat's ears are facing forward, and its whiskers can be seen extending from its face. The image does not provide enough detail to make out any specific sounds the cat might be making, but it seems to be in a calm and relaxed state. The background of the image is not clearly visible due to the focus on the cat.",
+            "projected": "The image appears to show a machine or device, possibly a mechanical part of a larger system, that is emitting a sound. Due to limitations in the image's angle and quality, I am unable to provide a detailed description of the object or its specific sound. However, the sound emitted by the object could be a hum, a whir, a clicking noise, or a series of tones, among other possibilities. The exact nature of the sound or the object itself would require a closer examination or additional context.",
         },
     },
     "3": {
