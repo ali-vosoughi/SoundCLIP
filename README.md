@@ -120,12 +120,3 @@ If you use SoundCLIP or the AVE-2 dataset in your research, please cite our pape
   year={2025}
 }
 ```
-
-## Contact
-For questions about this work, please contact:
-- Ali Vosoughi: [avosough@ur.rochester.edu](mailto:avosough@ur.rochester.edu)
-- Chenliang Xu: [chenliang.xu@rochester.edu](mailto:chenliang.xu@rochester.edu)
-
----
-Generated: 2025-08-11 19:59:45  
-University of Rochester Computer Science Department
