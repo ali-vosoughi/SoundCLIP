@@ -1,5 +1,7 @@
 # SoundCLIP: Can Sound Replace Vision in LLaVA With Token Substitution?
 
+[Code is coming soon.. stay tuned]
+
 🌐 **Live Demo**: [https://ali-vosoughi.github.io/SoundCLIP/](https://ali-vosoughi.github.io/SoundCLIP/)
 
 📄 **Paper**: [Can Sound Replace Vision in LLaVA With Token Substitution? (ArXiv)](https://arxiv.org/abs/2506.10416)
