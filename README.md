@@ -1,56 +1,61 @@
-# SoundCLIP: Can Sound Replace Vision in LLaVA With Token Substitution?
+# PROJECTED AUDIO TOKENS GAIN RETRIEVAL AND LOSE GROUNDED GENERATION IN MULTIMODAL LLMS
 
-[Code is coming soon.. stay tuned]
+Ali Vosoughi, Jing Bi, Pinxin Liu, Yolo Y. Tang, Chenliang Xu
 
-🌐 **Live Demo**: [https://ali-vosoughi.github.io/SoundCLIP/](https://ali-vosoughi.github.io/SoundCLIP/)
+Preprint; submitted to ICASSP 2027
 
-📄 **Paper**: [Can Sound Replace Vision in LLaVA With Token Substitution? (ArXiv)](https://arxiv.org/abs/2506.10416)
+🌐 **Project Page**: [https://ali-vosoughi.github.io/SoundCLIP/](https://ali-vosoughi.github.io/SoundCLIP/)
+
+📄 **Paper**: [Frozen ICASSP 2027 submission](paper/main.pdf)
 
 📊 **Dataset**: [AVE-2 on HuggingFace](https://huggingface.co/datasets/ali-vosoughi/ave-2)
 
 ## Project Overview
-This is the official project webpage for "Can Sound Replace Vision in LLaVA With Token Substitution?" featuring an interactive demonstration of our SoundCLIP framework and the fundamental trade-off between cross-modal retrieval and text generation.
+This is the official project webpage for "PROJECTED AUDIO TOKENS GAIN RETRIEVAL AND LOSE GROUNDED GENERATION IN MULTIMODAL LLMS". SoundCLIP compares raw and projected audio tokens in frozen LLaVA-1.6 with a Mistral-7B language backbone. The study measures audio-to-video retrieval, grounded caption generation, and representation geometry. These comparisons do not identify a causal mechanism.
 
 ## Authors
 - **Ali Vosoughi** - University of Rochester ([Website](https://alivosoughi.com/))
 - **Jing Bi** - University of Rochester ([Website](https://jing.vision/))
 - **Pinxin Liu** - University of Rochester ([Website](https://andypinxinliu.github.io/))
-- **Yunlong Tang** - University of Rochester ([Website](https://yunlong10.github.io/))
+- **Yolo Y. Tang** - University of Rochester ([Website](https://yoloytang.me/))
 - **Chenliang Xu** - University of Rochester ([Website](https://www.cs.rochester.edu/~cxu22/index.html))
 
 ## 🔗 Quick Links
-- 🌐 **Interactive Demo**: [https://ali-vosoughi.github.io/SoundCLIP/](https://ali-vosoughi.github.io/SoundCLIP/)
-- 📄 **Paper**: [ArXiv:2506.10416](https://arxiv.org/abs/2506.10416)
+- 🌐 **Project Page**: [https://ali-vosoughi.github.io/SoundCLIP/](https://ali-vosoughi.github.io/SoundCLIP/)
+- 📄 **Paper**: [Frozen ICASSP 2027 submission](paper/main.pdf)
+- 📄 **Earlier Version**: [ArXiv:2506.10416](https://arxiv.org/abs/2506.10416)
 - 💻 **Code**: [GitHub Repository](https://github.com/ali-vosoughi/SoundCLIP)
 - 📊 **Dataset**: [AVE-2 on HuggingFace](https://huggingface.co/datasets/ali-vosoughi/ave-2)
 
 ## Key Contributions
 
 ### 1. AVE-2 Dataset
-- **570,138 audio-visual clips** with revolutionary 5-dimensional alignment annotations
-- Now available on HuggingFace with comprehensive documentation and usage examples
-- Systematic scoring across: Temporal Alignment, Spatial Coherence, Contextual Relevance, Physical Causality, Sound Source Visibility
+- The corrected local rebuild contains **570,138 three-second audio-video segments** sourced from AudioSet.
+- AVE-2 provides visible and invisible active-source fields. The study uses AVE-2 for evaluation and geometry analysis.
+- The evaluation pool contains **1,006 clips**, yielding **1,010 clip-segments** for generation scoring; geometry is measured on **3,568 disjoint paired clips**.
 
-### 2. SoundCLIP Framework  
-- **Token substitution approach**: Replace CLIP's [CLS] token with audio tokens in LLaVA
-- **Two alignment strategies**: 
-  - Projected: MLP projection to CLIP space (maximizes I(A;V), better retrieval)
-  - Raw: Padded audio features (preserves H(A|V), better generation)
-- **Lightweight integration**: Only 1.9M parameters for projection layer
+### 2. SoundCLIP Framework
+- **Token substitution**: Replace the visual class token in frozen LLaVA-1.6-Mistral-7B with an audio token, retaining selected visual patch tokens.
+- **Two token constructions**:
+  - Projected: A three-layer MLP maps frozen audio-encoder features into CLIP's visual space.
+  - Raw: Audio-encoder features are padded or truncated to 1,024 dimensions without the learned visual mapping.
+- The study compares **five frozen audio encoders** at visual patch-token budgets **k = 15** and **k = 150**.
 
-### 3. Fundamental Trade-off Discovery
-- **Retrieval vs Generation**: y = 0.163x + 11.867 relationship discovered
-- Each percentage-point gain in retrieval incurs ~0.163% loss in generation quality
-
+### 3. Retrieval and Grounded Generation
+- Projection raises audio-to-video R@1 for every encoder on the evaluation pool, including ImageBind from **0.10% to 15.7%**. CLAP and Whisper R@1 values are lower bounds for their original encoder configurations.
+- At **k = 150**, the caption-to-audio grounding score B1 decreases by **23–53%** and source recall B3 by **31–48%** relative to raw tokens. Interpret CLAP B1 with B3 because the encoder and scorer share a checkpoint family.
+- Projection increases alignment with visual embeddings while orthogonal residual and nearest-neighbor overlap with the raw audio graph decrease. These are associations, not evidence of a causal mechanism.
+- Raw-over-projected generation scores predominate across **five frozen backbones from 7B to 34B** wherever raw-token generation is stable.
 
 ## Citation
 If you use SoundCLIP or the AVE-2 dataset in your research, please cite our paper:
 
 ```bibtex
-@article{vosoughi2025soundclip,
-  title={Can Sound Replace Vision in LLaVA With Token Substitution?},
-  author={Vosoughi, Ali and Bi, Jing and Liu, Pinxin and Tang, Yunlong and Xu, Chenliang},
-  journal={ArXiv},
-  year={2025}
+@unpublished{vosoughi2026soundclip,
+  title={{PROJECTED AUDIO TOKENS GAIN RETRIEVAL AND LOSE GROUNDED GENERATION IN MULTIMODAL LLMS}},
+  author={Vosoughi, Ali and Bi, Jing and Liu, Pinxin and Tang, Yolo Y. and Xu, Chenliang},
+  note={Preprint; submitted to ICASSP 2027},
+  year={2026},
+  url={https://ali-vosoughi.github.io/SoundCLIP/paper/main.pdf}
 }
 ```

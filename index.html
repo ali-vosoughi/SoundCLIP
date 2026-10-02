@@ -2,13 +2,13 @@
 <!-- 
 SoundCLIP Project Webpage
 Live at: https://ali-vosoughi.github.io/SoundCLIP/
-Paper: https://arxiv.org/abs/2506.10416
+Paper: paper/main.pdf (frozen submission)
 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundCLIP: Can Sound Replace Vision in LLaVA With Token Substitution?</title>
+    <title>PROJECTED AUDIO TOKENS GAIN RETRIEVAL AND LOSE GROUNDED GENERATION IN MULTIMODAL LLMS</title>
     <style>
         * {
             margin: 0;
@@ -652,6 +652,19 @@ Paper: https://arxiv.org/abs/2506.10416
                 grid-template-columns: 1fr;
             }
         }
+
+        .paper-figure { margin: 30px auto; max-width: 900px; }
+        .figure-image { position: relative; container-type: inline-size; }
+        .figure-image img { display: block; width: 100%; height: auto; }
+        .figure-label { position: absolute; transform: translate(-50%, -50%); font-size: clamp(7px, 2.4cqw, 21px); line-height: 1.15; white-space: nowrap; background: rgba(255,255,255,.85); padding: 1px 2px; }
+        .paper-figure figcaption { margin-top: 12px; color: #495057; font-size: .95rem; }
+        .results-table-wrap { overflow-x: auto; margin: 20px 0; }
+        .results-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+        .results-table caption { text-align: left; margin-bottom: 12px; }
+        .results-table th, .results-table td { padding: 12px; border: 1px solid #e9ecef; text-align: left; white-space: nowrap; }
+        .results-table thead, .results-table tbody tr:nth-child(even) { background: #f8f9fa; }
+        .citation-box { white-space: pre-wrap; overflow-wrap: anywhere; }
+        .nav-links { flex-wrap: wrap; }
     </style>
 </head>
 <body>
@@ -659,8 +672,9 @@ Paper: https://arxiv.org/abs/2506.10416
         <nav class="container">
             <div class="logo">SoundCLIP</div>
             <ul class="nav-links">
-                <li><a href="https://arxiv.org/abs/2506.10416" class="paper-link" target="_blank">📄 Paper</a></li>
+                <li><a href="paper/main.pdf" class="paper-link" target="_blank">📄 Paper</a></li>
                 <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#method">Method</a></li>
                 <li><a href="#demo">Demo</a></li>
                 <li><a href="#dataset">Dataset</a></li>
                 <li><a href="#results">Results</a></li>
@@ -671,15 +685,15 @@ Paper: https://arxiv.org/abs/2506.10416
 
     <div class="container">
         <section class="title-section">
-            <h1>Can Sound Replace Vision in LLaVA With Token Substitution?</h1>
-            <div class="subtitle">A Systematic Investigation of Audio-Visual Alignment Trade-offs in Multimodal Systems</div>
+            <h1>PROJECTED AUDIO TOKENS GAIN RETRIEVAL AND LOSE GROUNDED GENERATION IN MULTIMODAL LLMS</h1>
+            <div class="subtitle">Preprint; submitted to ICASSP 2027</div>
             
             <div class="authors">
                 <div class="author-list">
                     <a href="https://alivosoughi.com/" class="author">Ali Vosoughi</a>
                     <a href="https://jing.vision/" class="author">Jing Bi</a>
                     <a href="https://andypinxinliu.github.io/" class="author">Pinxin Liu</a>
-                    <a href="https://yunlong10.github.io/" class="author">Yunlong Tang</a>
+                    <a href="https://yoloytang.me/" class="author">Yolo Y. Tang</a>
                     <a href="https://www.cs.rochester.edu/~cxu22/index.html" class="author">Chenliang Xu</a>
                 </div>
                 <div class="affiliation">
@@ -688,7 +702,7 @@ Paper: https://arxiv.org/abs/2506.10416
             </div>
             
             <div class="btn-group">
-                <a href="https://arxiv.org/abs/2506.10416" class="btn btn-primary">📄 Read Paper</a>
+                <a href="paper/main.pdf" class="btn btn-primary">📄 Read Paper</a>
                 <a href="https://github.com/ali-vosoughi/SoundCLIP" class="btn">💻 Code</a>
                 <a href="https://huggingface.co/datasets/ali-vosoughi/ave-2" class="btn">🗂️ Dataset</a>
                 <a href="#demo" class="btn">🎬 Demo</a>
@@ -698,109 +712,69 @@ Paper: https://arxiv.org/abs/2506.10416
 
         <section id="abstract" class="section">
             <h2>Abstract</h2>
-            <p>What happens when we push audio-visual alignment to its absolute limits? To systematically investigate this question, we needed datasets with granular alignment quality annotations, but existing datasets treat alignment as binary, either synchronized or not. To address this limitation, we developed a comprehensive dataset featuring detailed alignment scores that reveal the hidden spectrum of audio-visual perceptual correspondence. Using these precise scores, we create "superaligned" representations by training exclusively on the most perfectly matched audio-visual pairs, then conduct our systematic investigation into how this extreme alignment transforms perceptual model behavior across retrieval and generation tasks.</p>
+            <p>We freeze Large Language and Vision Assistant 1.6 (LLaVA-1.6), a multimodal large language model (LLM) with a Mistral-7B language backbone, together with five frozen audio encoders. Each encoder supplies either a raw token, formed by padding or truncating to 1,024 dimensions, or a projected token learned in contrastive language-image pretraining (CLIP) space, and the token budget k is the number of retained visual patch tokens. On a 1,006-clip evaluation pool, projection raises audio-to-video recall at one (R@1) for every encoder, including ImageBind from 0.10% to 15.7%, although contrastive language-audio pretraining (CLAP) and Whisper R@1 values are lower bounds for their original configurations. At k=150, the CLAP-based reference-free grounding score (B1) decreases from 0.113–0.132 to 0.062–0.088, a 23–53% relative reduction, and the CLAP result is read with source recall (B3) because the encoder and scorer share a checkpoint family. B3 decreases from 0.161–0.185 to 0.090–0.112, a 31–48% relative reduction, while caption-to-frame CLIP similarity (B2) decreases for four encoders and is unchanged at printed precision for Wav2CLIP. Across 3,568 disjoint paired clips, projection increases centered kernel alignment with visual embeddings in all five encoders, while the norm outside the visual principal subspace and nearest-neighbor overlap with the raw audio graph decrease. The noncausal comparisons show that raw-token bilingual evaluation understudy (BLEU) exceeds projected-token BLEU in nine of ten audio-aware-reference cells and that raw-over-projected generation scores predominate across five frozen backbones from 7B to 34B wherever raw-token generation is stable.</p>
+        </section>
 
-            <p>Our findings reveal that the initial architectural type of the encoder determines how it responds to the alignment process. Image-centric encoders demonstrate exceptional performance in cross-modal retrieval, but this intensive alignment causes compression of unique linguistic information and reduces the quality of their text description generation. In contrast, text-centric encoders maintain better balance between the two objectives, revealing a fundamental trade-off where excessive alignment with the visual manifold leads to improved retrieval capabilities, but simultaneously reduces the richness of acoustic and linguistic information necessary for quality text description generation.</p>
+        <section id="method" class="section">
+            <h2>Controlled Audio-Token Substitution</h2>
+            <figure class="paper-figure">
+                <div class="figure-image">
+                    <img src="images/fig1_teaser_v2.png" alt="Projected and raw audio-token paths for an off-screen sound source." width="1836" height="857">
+                    <span class="figure-label" style="left: 15%; top: 9%">off-screen sound</span>
+                    <span class="figure-label" style="left: 40%; top: 9%">projected token</span>
+                    <span class="figure-label" style="left: 62%; top: 9%">generic caption</span>
+                    <span class="figure-label" style="left: 85%; top: 9%">video match</span>
+                    <span class="figure-label" style="left: 40%; top: 93%">raw token</span>
+                    <span class="figure-label" style="left: 62%; top: 93%">source caption</span>
+                </div>
+                <figcaption>The projected-token path retrieves the matching video but yields a generic caption, whereas the raw-token path misses the video but names the off-screen sound source.</figcaption>
+            </figure>
+            <p>SoundCLIP compares raw and projected tokens from AudioCLIP, Wav2CLIP, ImageBind, CLAP, and Whisper while keeping the audio encoders and LLaVA-1.6-Mistral-7B frozen. The raw token is padded or truncated to 1,024 dimensions. The projected token uses a three-layer MLP with layer normalization and GELU activations, trained to align the audio token with the paired CLIP visual embedding.</p>
+            <figure class="paper-figure">
+                <div class="figure-image">
+                    <img src="images/fig2_probe_v2.png" alt="Frozen audio encoder, raw or projected token substitution, visual patch selection, and frozen LLaVA." width="1711" height="919">
+                    <span class="figure-label" style="left: 14%; top: 12%">audio encoder</span>
+                    <span class="figure-label" style="left: 36%; top: 9%">projected token</span>
+                    <span class="figure-label" style="left: 36%; top: 52%">raw token</span>
+                    <span class="figure-label" style="left: 32%; top: 80%">visual patches</span>
+                    <span class="figure-label" style="left: 82%; top: 38%">frozen LLaVA</span>
+                    <span class="figure-label" style="left: 63%; top: 88%">video retrieval</span>
+                </div>
+                <figcaption>A frozen audio encoder yields a projected token or a 1,024-dimensional raw token. The token replaces the visual class token. At token budget k ∈ {15, 150}, the k most similar of 576 visual patch tokens condition frozen LLaVA-1.6. The token also supports audio-to-video retrieval.</figcaption>
+            </figure>
         </section>
 
         <section id="dataset" class="section">
             <h2>AVE-2 Dataset</h2>
-            <p>We introduce <strong>AudioVisual Event Evaluation (AVE-2)</strong>, a dataset of 570,138 three-second audiovisual clips with fine-grained alignment annotations. Unlike existing datasets that treat alignment as binary, AVE-2 provides detailed alignment scores across five dimensions, enabling systematic investigation of audio-visual correspondence quality.</p>
-
+            <p>The evaluation pool is drawn from <strong>Audio-Visual Event 2 (AVE-2)</strong>. The corrected local rebuild contains 570,138 three-second audio-video segments sourced from AudioSet. The paper uses AVE-2 for evaluation and geometry analysis. Its active-source fields support source recall (B3); machine-generated alignment scores are not used as ground truth.</p>
             <div class="stats">
-                <div class="stat-item">
-                    <span class="stat-number">570K</span>
-                    <div class="stat-label">Audio-Visual Clips</div>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">5</span>
-                    <div class="stat-label">Alignment Dimensions</div>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">3</span>
-                    <div class="stat-label">Seconds per Clip</div>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">7</span>
-                    <div class="stat-label">Demo Examples</div>
-                </div>
+                <div class="stat-item"><span class="stat-number">570,138</span><div class="stat-label">Three-second Segments</div></div>
+                <div class="stat-item"><span class="stat-number">1,006</span><div class="stat-label">Evaluation Clips</div></div>
+                <div class="stat-item"><span class="stat-number">1,010</span><div class="stat-label">Generation Clip-segments</div></div>
+                <div class="stat-item"><span class="stat-number">3,568</span><div class="stat-label">Disjoint Geometry Clips</div></div>
             </div>
-
-            <!-- ADDED: Dataset usage section -->
             <div class="dataset-usage">
-                <h3>🚀 Getting Started with AVE-2</h3>
-                <p>AVE-2 is now available on HuggingFace! Get started with our comprehensive dataset in just a few lines of code:</p>
-
+                <h3>Getting Started with AVE-2</h3>
+                <p>Use the dataset documentation to inspect the metadata and media.</p>
                 <div class="usage-steps">
-                    <div class="usage-step">
-                        <h4>📥 Step 1: Basic Loading</h4>
-                        <p>Load the dataset metadata and explore 570K samples with alignment scores instantly.</p>
-                    </div>
-                    <div class="usage-step">
-                        <h4>🎬 Step 2: Download Media</h4>
-                        <p>Download chunked video files (237GB total) for complete audio-visual analysis.</p>
-                    </div>
-                    <div class="usage-step">
-                        <h4>🔍 Step 3: Start Analyzing</h4>
-                        <p>Filter by quality scores, explore alignment dimensions, and build your models.</p>
-                    </div>
+                    <div class="usage-step"><h4>Load Metadata</h4><p>Inspect clip metadata and source annotations.</p></div>
+                    <div class="usage-step"><h4>Read Media Instructions</h4><p>Follow the dataset documentation for the corresponding media files.</p></div>
+                    <div class="usage-step"><h4>Inspect Source Fields</h4><p>Explore visible and invisible active sound sources.</p></div>
                 </div>
-
-                <div class="code-block">
-<span class="comment"># Install required packages</span>
-pip install datasets opencv-python librosa
-
-<span class="comment"># Load dataset with metadata (instant)</span>
-<span class="keyword">from</span> datasets <span class="keyword">import</span> load_dataset
-dataset = load_dataset(<span class="string">"ali-vosoughi/ave-2"</span>)
-
-<span class="comment"># Explore a sample</span>
-sample = dataset[<span class="string">"train"</span>][0]
-<span class="keyword">print</span>(<span class="string">f"Video ID: {sample['youtube_id']}"</span>)
-<span class="keyword">print</span>(<span class="string">f"Temporal Alignment: {sample['temporal_alignment_score']}/10"</span>)
-<span class="keyword">print</span>(<span class="string">f"Video Caption: {sample['video_caption'][:100]}..."</span>)
-                </div>
-
-                <div class="code-block">
-<span class="comment"># For complete dataset with video files:</span>
-<span class="comment"># 1. Download media parts</span>
-huggingface-cli download ali-vosoughi/ave-2 --include=<span class="string">"ave2_media_part_*"</span> --local-dir ./
-
-<span class="comment"># 2. Reconstruct media archive</span>
-cat ave2_media_part_* > ave2_media.zip && unzip ave2_media.zip
-
-<span class="comment"># 3. Verify reconstruction</span>
-md5sum -c ave2_media.md5
-
-<span class="comment"># 4. Use with media files</span>
-dataset = load_dataset(<span class="string">"ali-vosoughi/ave-2"</span>)  <span class="comment"># Now includes video paths!</span>
-                </div>
-
-                <div class="code-block">
-<span class="comment"># Quality-aware filtering</span>
-high_quality = dataset.filter(<span class="keyword">lambda</span> x: all([
-    x[<span class="string">'temporal_alignment_score'</span>] >= 8,
-    x[<span class="string">'spatial_coherence_score'</span>] >= 8,
-    x[<span class="string">'physical_causality_score'</span>] >= 8
-]))
-
-<span class="comment"># Analyze invisible sound sources</span>
-invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[<span class="string">'invisible_active_sources'</span>]) > 0)
-<span class="keyword">print</span>(<span class="string">f"Samples with invisible sources: {len(invisible_samples['train'])}"</span>)
-                </div>
-
-                <p><strong>🔗 Dataset Links:</strong></p>
+                <pre class="code-block"><span class="keyword">from</span> datasets <span class="keyword">import</span> load_dataset
+dataset = load_dataset(<span class="string">"ali-vosoughi/ave-2"</span>)</pre>
+                <p><strong>Dataset Links:</strong></p>
                 <ul style="margin: 15px 0; padding-left: 20px;">
-                    <li><a href="https://huggingface.co/datasets/ali-vosoughi/ave-2" target="_blank">📊 HuggingFace Dataset Page</a></li>
-                    <li><a href="https://huggingface.co/datasets/ali-vosoughi/ave-2/tree/main" target="_blank">📁 Browse Files & Documentation</a></li>
-                    <li><a href="https://github.com/ali-vosoughi/SoundCLIP" target="_blank">💻 GitHub Repository with Examples</a></li>
+                    <li><a href="https://huggingface.co/datasets/ali-vosoughi/ave-2">HuggingFace Dataset Page</a></li>
+                    <li><a href="https://huggingface.co/datasets/ali-vosoughi/ave-2/tree/main">Browse Files &amp; Documentation</a></li>
+                    <li><a href="https://github.com/ali-vosoughi/SoundCLIP">GitHub Repository</a></li>
                 </ul>
             </div>
         </section>
 
         <section id="demo" class="section">
             <h2>Interactive Demo</h2>
-            <p>Explore how different audio encoders (Raw vs Projected) generate different captions for the same audiovisual content. Click on any encoder mode button to see the generated caption.</p>
+            <p>These archived examples illustrate raw and projected captions from the earlier project page. They are not results from the current evaluation pool. Click an encoder mode to inspect an earlier generated caption; bracketed ellipses mark omitted passages.</p>
             
             <div class="demo-container">
                 
@@ -809,7 +783,6 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                         <div class="example-title">Example 1</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: rvbmYs4Kl3Y (Segment 01)</span>
-                            <span class="score-badge">Alignment Score: 47.0/50</span>
                         </div>
                     </div>
                     
@@ -822,59 +795,18 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                     
                     <div class="descriptions-grid">
                         <div class="description-card">
-                            <h4>Visual Description</h4>
+                            <h4>Earlier Visual Description</h4>
                             <p>The video takes place in a workshop setting, specifically at Finney's. The background features various tools and materials typically found in woodworking or similar crafts, such as wooden planks, a workbench, and shelves with additional items. There is also signage indicating "Finney's Expert Advice Simple Solutions Beautiful Work" on the wall. In the first scene, an individual wearing glasses and a black shirt with a white apron stands behind a workbench. They are holding a can of paint and appear to be preparing it for use. On the workbench, there is a rectangular piece of wood that looks like a cutting board, along with other tools and materials. A bottle labeled "Paint" is placed nearby, suggesting that painting might be part of their task. The second scene shows the same person continuing to prepare the paint can. This time, they are using their hands to apply the paint onto the cutting board. The environment remains consistent throughout, reinforcing the idea that this is a dedicated workspace for painting tasks. The third scene continues with the individual still engaged in painting. The focus remains on the process of applying the paint, which appears to be a light color given its sheen. The surrounding area includes more tools and materials, maintaining the workshop ambiance. The fourth scene captures another moment where the individual is seen working on the painting process. The lighting seems slightly dimmer than in previous scenes, possibly due to the nature of the work being done. The overall mood remains focused and industrious. The fifth scene returns to the individual standing behind the workbench, now holding a small container that likely contains additional paint or a different type of material. The arrangement of objects and characters suggests a continuation of the painting activity. The final scene shifts to a different angle, showing the individual from a side perspective. The lighting is brighter compared to earlier scenes, emphasizing the ongoing painting activity. The surroundings remain unchanged, reinforcing the continuity of the workshop environment. Overall, the video provides a detailed look into a typical day in a woodworking workshop, focusing on the activities involved in painting.</p>
                         </div>
                         <div class="description-card">
-                            <h4>Audio Description</h4>
+                            <h4>Earlier Audio Description</h4>
                             <p>Labels with acoustic features: Deep, resonant, authoritative, and assertive -> Male speech, man speaking; Characterized by its loudness, pitch, and timbre -> Speech; Generally high frequency, short duration -> Animal</p>
-                        </div>
-                    </div>
-                    
-                    <div class="alignment-scores">
-                        <h4>Alignment Analysis</h4>
-                        <div class="scores-grid">
-                            <div class="score-item">
-                                <div class="score-label">Temporal</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Spatial</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Contextual</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Causality</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 90.0%"></div>
-                                    <span class="score-value">9/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Visibility</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="sound-sources">
                         <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-description">Earlier machine-generated source annotations:</div>
                         <div class="source-item visible-active">
                             <span class="source-label">👁️ Visible Active:</span>
                             <span class="source-list">Man, Cutting board, Paint canister</span>
@@ -899,7 +831,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                             <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
                         </div>
                         <div class="encoder-column">
-                            <div class="encoder-label">WHISPERCLIP</div>
+                            <div class="encoder-label">WHISPER</div>
                             <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
                             <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
                         </div>
@@ -919,7 +851,6 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                         <div class="example-title">Example 2</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: IwqD859w2_E (Segment 02)</span>
-                            <span class="score-badge">Alignment Score: 44.0/50</span>
                         </div>
                     </div>
                     
@@ -932,59 +863,18 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                     
                     <div class="descriptions-grid">
                         <div class="description-card">
-                            <h4>Visual Description</h4>
+                            <h4>Earlier Visual Description</h4>
                             <p>The video begins with a close-up of a person playing a red acoustic guitar on a wooden floor. The lighting is dim, creating shadows and highlighting the guitar's details. The background is dark, emphasizing the subject in focus. As the video progresses, the scene transitions to a wider shot showing the same person from behind, still holding the guitar. The lighting remains consistent, casting soft shadows around the person and the guitar. The setting appears to be indoors, possibly a room or studio, given the presence of what looks like a microphone stand in the background. In the final part of the video, the camera shifts slightly to show more of the person's hands as they play the guitar. The lighting continues to be dim, maintaining the mood of the earlier scenes. The person's movements are deliberate and focused, suggesting a practice session or performance. Throughout the video, there are no significant changes in the environment or actions apart from the progression of the shots. The overall atmosphere is one of concentration and musical expression.</p>
                         </div>
                         <div class="description-card">
-                            <h4>Audio Description</h4>
+                            <h4>Earlier Audio Description</h4>
                             <p>Labels with acoustic features: Rich and varied -> Musical instrument; Bright and percussive -> Plucked string instrument; Full, bright, and complex -> Guitar; Rich and dynamic -> Music; Strong and resonant -> Piano; Bright and percussive -> Percussion; Warm and full-bodied -> Acoustic guitar; Bright and percussive -> Strum</p>
-                        </div>
-                    </div>
-                    
-                    <div class="alignment-scores">
-                        <h4>Alignment Analysis</h4>
-                        <div class="scores-grid">
-                            <div class="score-item">
-                                <div class="score-label">Temporal</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 90.0%"></div>
-                                    <span class="score-value">9/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Spatial</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Contextual</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Causality</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 90.0%"></div>
-                                    <span class="score-value">9/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Visibility</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="sound-sources">
                         <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-description">Earlier machine-generated source annotations:</div>
                         <div class="source-item visible-active">
                             <span class="source-label">👁️ Visible Active:</span>
                             <span class="source-list">Guitar</span>
@@ -1013,7 +903,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                             <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
                         </div>
                         <div class="encoder-column">
-                            <div class="encoder-label">WHISPERCLIP</div>
+                            <div class="encoder-label">WHISPER</div>
                             <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
                             <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
                         </div>
@@ -1033,7 +923,6 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                         <div class="example-title">Example 3</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: DDer7K8WG4I (Segment 02)</span>
-                            <span class="score-badge">Alignment Score: 46.0/50</span>
                         </div>
                     </div>
                     
@@ -1046,59 +935,18 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                     
                     <div class="descriptions-grid">
                         <div class="description-card">
-                            <h4>Visual Description</h4>
-                            <p>The video begins with a view of an old, tall brick tower with pointed arches and decorative elements. The tower has three levels, each adorned with ornate details such as statues and intricate patterns. At the top level, there are two bells hanging from what appears to be a small balcony or ledge. Below this, on the second level, there is another set of bells, also hanging from a similar structure. In the foreground, there's a building with a sign that reads "PITI" in red letters against a white background. To the left side of the frame, part of another building can be seen, which seems to have a more modern appearance compared to the one in the foreground. The scene transitions smoothly into a festive atmosphere, indicated by garlands draped across the lower portion of the image. The sky remains overcast, suggesting it might be a cloudy day. As the video progresses, the focus shifts back to the tower, now showing its full height and detailed architecture. The bells remain visible, and the overall setting remains consistent throughout the video. Towards the end of the video, the camera angle changes slightly, revealing more of the surroundings, including additional buildings and trees. The lighting dims slightly, indicating either early morning or late afternoon light. Throughout the video, the visual elements include the brick tower, the bell towers, the greenery, and the architectural style of the surrounding structures. There are no significant movements apart from the slight change in perspective.</p>
+                            <h4>Earlier Visual Description</h4>
+                            <p>The video begins with a view of an old, tall brick tower with pointed arches and decorative elements. […] In the foreground, there's a building with a sign that reads "PITI" in red letters against a white background. To the left side of the frame, part of another building can be seen, which seems to have a more modern appearance compared to the one in the foreground. The scene transitions smoothly into a festive atmosphere, indicated by garlands draped across the lower portion of the image. The sky remains overcast, suggesting it might be a cloudy day. As the video progresses, the focus shifts back to the tower, now showing its full height and detailed architecture. The bells remain visible, and the overall setting remains consistent throughout the video. Towards the end of the video, the camera angle changes slightly, revealing more of the surroundings, including additional buildings and trees. The lighting dims slightly, indicating either early morning or late afternoon light. Throughout the video, the visual elements include the brick tower, the bell towers, the greenery, and the architectural style of the surrounding structures. There are no significant movements apart from the slight change in perspective.</p>
                         </div>
                         <div class="description-card">
-                            <h4>Audio Description</h4>
+                            <h4>Earlier Audio Description</h4>
                             <p>Audio caption: A church bell is ringing in a town square.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="alignment-scores">
-                        <h4>Alignment Analysis</h4>
-                        <div class="scores-grid">
-                            <div class="score-item">
-                                <div class="score-label">Temporal</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Spatial</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Contextual</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 90.0%"></div>
-                                    <span class="score-value">9/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Causality</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 90.0%"></div>
-                                    <span class="score-value">9/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Visibility</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="sound-sources">
                         <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-description">Earlier machine-generated source annotations:</div>
                         <div class="source-item visible-active">
                             <span class="source-label">👁️ Visible Active:</span>
                             <span class="source-list">Church bells</span>
@@ -1127,7 +975,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                             <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
                         </div>
                         <div class="encoder-column">
-                            <div class="encoder-label">WHISPERCLIP</div>
+                            <div class="encoder-label">WHISPER</div>
                             <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
                             <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
                         </div>
@@ -1147,7 +995,6 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                         <div class="example-title">Example 4</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: UorSpZVnX_M (Segment 02)</span>
-                            <span class="score-badge">Alignment Score: 46.0/50</span>
                         </div>
                     </div>
                     
@@ -1160,59 +1007,18 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                     
                     <div class="descriptions-grid">
                         <div class="description-card">
-                            <h4>Visual Description</h4>
+                            <h4>Earlier Visual Description</h4>
                             <p>The video begins with a close-up view of a red stand mixer on a kitchen countertop. The mixer is in the process of mixing dough, which appears to be light yellow and slightly sticky. The background shows a granite countertop and some kitchen utensils, indicating that this scene takes place in a home kitchen. As the video progresses, the focus shifts to the dough being mixed by the mixer. The dough is thick and smooth, with visible air bubbles indicating it has been kneaded. The mixer's motor is spinning rapidly as the dough is being incorporated into the bowl. The lighting is bright, illuminating the dough and making its texture more visible. Towards the end of the video, the dough is fully mixed and ready for the next step in the recipe. The mixer continues to spin at high speed, ensuring the dough is well-mixed and evenly spread out. The background remains consistent throughout, showing the same kitchen countertop and utensils. Throughout the video, there are no significant changes or transitions between scenes; the setting and actions remain constant. The overall mood conveyed by the visual elements is one of preparation and cooking, suggesting that the person preparing the dough is likely following a recipe or instructions provided in the video.</p>
                         </div>
                         <div class="description-card">
-                            <h4>Audio Description</h4>
+                            <h4>Earlier Audio Description</h4>
                             <p>Labels with acoustic features: High-pitched and whirring -> Power tool; Rich in frequency modulation -> Speech</p>
-                        </div>
-                    </div>
-                    
-                    <div class="alignment-scores">
-                        <h4>Alignment Analysis</h4>
-                        <div class="scores-grid">
-                            <div class="score-item">
-                                <div class="score-label">Temporal</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 90.0%"></div>
-                                    <span class="score-value">9/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Spatial</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Contextual</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Causality</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 90.0%"></div>
-                                    <span class="score-value">9/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Visibility</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="sound-sources">
                         <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-description">Earlier machine-generated source annotations:</div>
                         <div class="source-item visible-active">
                             <span class="source-label">👁️ Visible Active:</span>
                             <span class="source-list">mixer, speaker</span>
@@ -1241,7 +1047,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                             <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
                         </div>
                         <div class="encoder-column">
-                            <div class="encoder-label">WHISPERCLIP</div>
+                            <div class="encoder-label">WHISPER</div>
                             <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
                             <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
                         </div>
@@ -1261,7 +1067,6 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                         <div class="example-title">Example 5</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: EQHrQIaQNv8 (Segment 03)</span>
-                            <span class="score-badge">Alignment Score: 45.0/50</span>
                         </div>
                     </div>
                     
@@ -1274,59 +1079,18 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                     
                     <div class="descriptions-grid">
                         <div class="description-card">
-                            <h4>Visual Description</h4>
+                            <h4>Earlier Visual Description</h4>
                             <p>The video begins with a close-up of a person's hands playing an electric guitar. The individual is wearing a black shirt and brown pants, seated on what appears to be a bench or chair. The background is out of focus, but it seems to be an indoor setting with artificial lighting. The scene transitions smoothly into the next frame, where the same person is seen holding the same electric guitar. This time, the guitar has a unique design that resembles a long-necked instrument, possibly a custom-built model known as a "Guitar Hero." The guitar features a prominent logo at the bottom that reads "Guitar Hero," indicating its brand identity. The person continues to play the guitar, adjusting their fingers on the fretboard and strumming the strings. In the final part of the video, the person is still engaged in playing the Guitar Hero guitar. They are shown from a slightly different angle, maintaining the same posture and focus on the guitar. The background remains consistent throughout this segment, reinforcing the continuity between scenes. Throughout the video, there are no significant changes in the environment or actions; the setting remains unchanged, and the main action revolves around the guitar player and their interaction with the instrument.</p>
                         </div>
                         <div class="description-card">
-                            <h4>Audio Description</h4>
+                            <h4>Earlier Audio Description</h4>
                             <p>Labels with acoustic features: Rich in frequency modulation -> Speech; Bright and clear -> Harmonica; Smooth and resonant -> Guitar</p>
-                        </div>
-                    </div>
-                    
-                    <div class="alignment-scores">
-                        <h4>Alignment Analysis</h4>
-                        <div class="scores-grid">
-                            <div class="score-item">
-                                <div class="score-label">Temporal</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Spatial</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Contextual</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Causality</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 90.0%"></div>
-                                    <span class="score-value">9/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Visibility</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="sound-sources">
                         <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-description">Earlier machine-generated source annotations:</div>
                         <div class="source-item visible-active">
                             <span class="source-label">👁️ Visible Active:</span>
                             <span class="source-list">Guitar</span>
@@ -1355,7 +1119,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                             <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
                         </div>
                         <div class="encoder-column">
-                            <div class="encoder-label">WHISPERCLIP</div>
+                            <div class="encoder-label">WHISPER</div>
                             <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
                             <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
                         </div>
@@ -1375,7 +1139,6 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                         <div class="example-title">Example 6</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: GJhYkfI7jpU (Segment 03)</span>
-                            <span class="score-badge">Alignment Score: 42.0/50</span>
                         </div>
                     </div>
                     
@@ -1388,59 +1151,18 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                     
                     <div class="descriptions-grid">
                         <div class="description-card">
-                            <h4>Visual Description</h4>
+                            <h4>Earlier Visual Description</h4>
                             <p>The video begins with a close-up of a person's hand holding a black speaker. The background shows a wooden block and a green plastic container on a table, suggesting an indoor setting possibly in a kitchen or workshop. The scene transitions to the speaker being turned off, indicating that it is not currently playing music. Next, the focus shifts to a small circuit board placed on the same table as the speaker. A blue LED light is illuminated, which could be part of an electronic project or experiment. The circuit board has several wires connected to it, some of which are visible and appear to be part of the electronics setup. The video then moves forward to show the same circuit board now powered up by a battery, with the blue LED light still on. This suggests that the circuitry is functioning correctly and is likely part of a larger electronic device or system. In the final segment, the video continues with the circuit board now powered up, showing the blue LED light glowing brightly. The surrounding environment remains consistent with the previous scenes, maintaining continuity between the different stages of the project. Throughout the video, there are no significant changes in the actions or events occurring; instead, the sequence of images captures the progression from turning off the speaker to powering up the circuit board and finally illuminating the LED light.</p>
                         </div>
                         <div class="description-card">
-                            <h4>Audio Description</h4>
+                            <h4>Earlier Audio Description</h4>
                             <p>Labels with acoustic features: Rich in frequency modulation -> Speech; Bright and sharp -> Alarm clock</p>
-                        </div>
-                    </div>
-                    
-                    <div class="alignment-scores">
-                        <h4>Alignment Analysis</h4>
-                        <div class="scores-grid">
-                            <div class="score-item">
-                                <div class="score-label">Temporal</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Spatial</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Contextual</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 70.0%"></div>
-                                    <span class="score-value">7/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Causality</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 90.0%"></div>
-                                    <span class="score-value">9/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Visibility</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="sound-sources">
                         <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-description">Earlier machine-generated source annotations:</div>
                         <div class="source-item visible-active">
                             <span class="source-label">👁️ Visible Active:</span>
                             <span class="source-list">Speaker</span>
@@ -1469,7 +1191,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                             <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
                         </div>
                         <div class="encoder-column">
-                            <div class="encoder-label">WHISPERCLIP</div>
+                            <div class="encoder-label">WHISPER</div>
                             <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
                             <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
                         </div>
@@ -1489,7 +1211,6 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                         <div class="example-title">Example 7</div>
                         <div class="example-meta">
                             <span class="video-id">Video ID: AVL7Kbpw13U (Segment 01)</span>
-                            <span class="score-badge">Alignment Score: 42.0/50</span>
                         </div>
                     </div>
                     
@@ -1502,59 +1223,18 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                     
                     <div class="descriptions-grid">
                         <div class="description-card">
-                            <h4>Visual Description</h4>
+                            <h4>Earlier Visual Description</h4>
                             <p>The video begins with a person sitting on a chair, wrapped in a maroon blanket or towel. The background features a wooden floor and various plants, creating an indoor setting that appears cozy and lived-in. As the scene develops, the person starts to move around, bending down and adjusting their position slightly. They eventually sit up straight again, still wrapped in the same maroon item. In the next few frames, the person continues to adjust their posture while still wrapped in the blanket. This suggests they are either getting ready for bed or preparing to get out of bed. The room's decor remains consistent throughout, maintaining a warm and homely atmosphere. Towards the end of this segment, the person is seen standing up from the chair, holding the blanket over their head as if it were a hat. This action indicates they might be about to put it back on or have just taken it off. The final frame shows the person walking away from the chair, leaving the scene empty once more. Throughout the video, there are no significant changes in the environment or actions apart from the person's movements. The lighting is soft and natural, suggesting daytime or well-lit indoor conditions. There are no visible texts or subtitles within the video itself.</p>
                         </div>
                         <div class="description-card">
-                            <h4>Audio Description</h4>
+                            <h4>Earlier Audio Description</h4>
                             <p>Labels with acoustic features: Rich in frequency modulation -> Speech; High-pitched and short -> Sneeze; Generally high pitched, sweet, and giggly -> Child speech, kid speaking; Loud, harsh, and discordant -> Noise; Chaotic and non-structured -> Background noise; Full range and varied -> Human voice; Richly complex -> Human voice</p>
-                        </div>
-                    </div>
-                    
-                    <div class="alignment-scores">
-                        <h4>Alignment Analysis</h4>
-                        <div class="scores-grid">
-                            <div class="score-item">
-                                <div class="score-label">Temporal</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Spatial</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 100.0%"></div>
-                                    <span class="score-value">10/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Contextual</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 70.0%"></div>
-                                    <span class="score-value">7/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Causality</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 90.0%"></div>
-                                    <span class="score-value">9/10</span>
-                                </div>
-                            </div>
-                            <div class="score-item">
-                                <div class="score-label">Visibility</div>
-                                <div class="score-bar">
-                                    <div class="score-fill" style="width: 80.0%"></div>
-                                    <span class="score-value">8/10</span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
                     <div class="sound-sources">
                         <h4>Sound Source Visibility Analysis</h4>
-                        <div class="source-description">Mistral's analysis of sound sources in the audiovisual scene:</div>
+                        <div class="source-description">Earlier machine-generated source annotations:</div>
                         <div class="source-item visible-active">
                             <span class="source-label">👁️ Visible Active:</span>
                             <span class="source-list">Person</span>
@@ -1583,7 +1263,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                             <button class="mode-button raw" data-encoder="wav2clip" data-mode="raw">Raw</button>
                         </div>
                         <div class="encoder-column">
-                            <div class="encoder-label">WHISPERCLIP</div>
+                            <div class="encoder-label">WHISPER</div>
                             <button class="mode-button" data-encoder="whisper" data-mode="projected">Projected</button>
                             <button class="mode-button raw" data-encoder="whisper" data-mode="raw">Raw</button>
                         </div>
@@ -1603,25 +1283,37 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
 
         <section id="results" class="section">
             <h2>Key Findings</h2>
-            <p>Our systematic investigation reveals a fundamental trade-off where excessive alignment with the visual manifold leads to improved retrieval capabilities, but simultaneously reduces the richness of acoustic and linguistic information necessary for quality text description generation.</p>
-
-            <h3>Performance Trade-offs</h3>
-            <p>Image-centric encoders (ImageBind, AudioCLIP, Wav2CLIP) demonstrate exceptional performance in cross-modal retrieval due to their inherent design for visual alignment, but this intensive alignment causes compression of unique linguistic information and reduces text generation quality. Text-centric encoders (CLAP, Whisper) maintain stronger linguistic authenticity and achieve better balance between retrieval and generation objectives.</p>
-
-            <h3>Architectural Insights</h3>
-            <p>The initial architectural type of the encoder determines how it responds to the alignment process. Encoders pre-trained with text supervision maintain stronger generative capabilities than those focused primarily on audiovisual alignment, highlighting the value of language exposure for generation tasks.</p>
-
-            <h3>Pareto Frontier Discovery</h3>
-            <p>We establish a clear Pareto frontier for cross-modal learning, providing guidelines for choosing between retrieval accuracy and generative richness based on application needs. This challenges the assumption that stronger cross-modal alignment necessarily benefits all multimodal tasks.</p>
+            <p>Within the tested configurations, projection raises audio-to-video retrieval and lowers audio grounding and source recall. The main comparison uses frozen LLaVA-1.6-Mistral-7B.</p>
+            <h3>Retrieval and Grounded Generation</h3>
+            <p>At k=150, B1 decreases by 23–53% and B3 decreases by 31–48% relative to raw tokens across all five encoders. B2 decreases for four encoders and is unchanged at printed precision for Wav2CLIP.</p>
+            <div class="results-table-wrap" tabindex="0" role="region" aria-label="Raw and projected token results">
+                <table class="results-table">
+                    <caption>Raw → projected tokens at k=150. R@1 (%) uses 1,006 evaluation clips; B1, B2, and B3 use 1,010 clip-segments.</caption>
+                    <thead><tr><th scope="col">Encoder</th><th scope="col">R@1 (%)</th><th scope="col">B1</th><th scope="col">B2</th><th scope="col">B3</th></tr></thead>
+                    <tbody>
+                    <tr><th scope="row">AudioCLIP</th><td>0.00 → 1.19</td><td>0.125 → 0.088</td><td>0.219 → 0.204</td><td>0.161 → 0.111</td></tr>
+                    <tr><th scope="row">Wav2CLIP</th><td>0.00 → 3.88</td><td>0.113 → 0.086</td><td>0.211 → 0.211</td><td>0.163 → 0.112</td></tr>
+                    <tr><th scope="row">ImageBind</th><td>0.10 → 15.71</td><td>0.132 → 0.078</td><td>0.226 → 0.198</td><td>0.169 → 0.094</td></tr>
+                    <tr><th scope="row">CLAP</th><td>0.10 → 1.99</td><td>0.129 → 0.071</td><td>0.225 → 0.199</td><td>0.185 → 0.107</td></tr>
+                    <tr><th scope="row">Whisper</th><td>0.10 → 0.70</td><td>0.131 → 0.062</td><td>0.223 → 0.192</td><td>0.174 → 0.090</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>B1 is caption-to-audio CLAP similarity, B2 is caption-to-middle-frame CLIP similarity, and B3 is semantic recall of active sound sources. CLAP and Whisper R@1 values are lower bounds for their original encoder configurations. Interpret CLAP B1 with B3 because the encoder and scorer share a checkpoint family.</p>
+            <h3>Representation Geometry</h3>
+            <p>Across 3,568 disjoint paired clips, projection raises centered kernel alignment with visual embeddings and effective rank for every encoder. Orthogonal residual and nearest-neighbor overlap with the raw audio graph decrease. These comparisons do not identify a causal mechanism.</p>
+            <h3>Scope and Backbone Stability</h3>
+            <p>Raw-over-projected generation scores predominate across five frozen backbones from 7B to 34B wherever raw-token generation is stable. Raw-token BLEU exceeds projected-token BLEU in nine of ten audio-aware-reference cells. The study is limited to the tested encoders, backbones, and evaluation pool.</p>
         </section>
 
         <section id="code" class="section">
             <h2>Code and Resources</h2>
-            <p>All code, data, and pre-trained models are made available to facilitate reproducibility and future research in audio-visual alignment.</p>
+            <p>Read the current paper and explore the project repository and AVE-2 documentation.</p>
 
             <div class="btn-group">
                 <a href="https://github.com/ali-vosoughi/SoundCLIP" class="btn btn-primary">GitHub Repository</a>
-                <a href="https://arxiv.org/abs/2506.10416" class="btn">ArXiv Paper</a>
+                <a href="paper/main.pdf" class="btn">Current Paper</a>
+                <a href="https://arxiv.org/abs/2506.10416" class="btn">Earlier arXiv Version</a>
                 <a href="https://huggingface.co/datasets/ali-vosoughi/ave-2" class="btn">HuggingFace Dataset</a>
             </div>
         </section>
@@ -1629,14 +1321,13 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
         <section id="citation" class="section">
             <h2>Citation</h2>
             <p>If you use SoundCLIP or the AVE-2 dataset in your research, please cite our paper:</p>
-            <div class="citation-box">
-@article{vosoughi2025soundclip,
-  title={Can Sound Replace Vision in LLaVA With Token Substitution?},
-  author={Vosoughi, Ali and Bi, Jing and Liu, Pinxin and Tang, Yunlong and Xu, Chenliang},
-  journal={Arxiv},
-  year={2026}
-}
-            </div>
+            <pre class="citation-box">@unpublished{vosoughi2026soundclip,
+  title={{PROJECTED AUDIO TOKENS GAIN RETRIEVAL AND LOSE GROUNDED GENERATION IN MULTIMODAL LLMS}},
+  author={Vosoughi, Ali and Bi, Jing and Liu, Pinxin and Tang, Yolo Y. and Xu, Chenliang},
+  note={Preprint; submitted to ICASSP 2027},
+  year={2026},
+  url={https://ali-vosoughi.github.io/SoundCLIP/paper/main.pdf}
+}</pre>
         </section>
     </div>
 
@@ -1648,12 +1339,13 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                     <p><a href="https://alivosoughi.com/">Ali Vosoughi</a></p>
                     <p><a href="https://jing.vision/">Jing Bi</a></p>
                     <p><a href="https://andypinxinliu.github.io/">Pinxin Liu</a></p>
-                    <p><a href="https://yunlong10.github.io/">Yunlong Tang</a></p>
+                    <p><a href="https://yoloytang.me/">Yolo Y. Tang</a></p>
                     <p><a href="https://www.cs.rochester.edu/~cxu22/index.html">Chenliang Xu</a></p>
                 </div>
                 <div class="footer-section">
                     <h4>Resources</h4>
-                    <p><a href="https://arxiv.org/abs/2506.10416">ArXiv Paper</a></p>
+                    <p><a href="https://ali-vosoughi.github.io/">Ali Vosoughi’s Showcase</a></p>
+                    <p><a href="paper/main.pdf">Current Paper</a></p>
                     <p><a href="https://github.com/ali-vosoughi/SoundCLIP">GitHub Repository</a></p>
                     <p><a href="https://huggingface.co/datasets/ali-vosoughi/ave-2">AVE-2 Dataset</a></p>
                 </div>
@@ -1664,7 +1356,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                     <p>Rochester, NY, USA</p>
                 </div>
             </div>
-            <p>&copy; 2025 University of Rochester Computer Science Department. All rights reserved.</p>
+            <p>&copy; University of Rochester Computer Science Department. All rights reserved.</p>
         </div>
     </footer>
 
@@ -1760,7 +1452,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
     },
     "5": {
         "audioclip": {
-            "raw": "In the image, there is a large mechanical clock with a pendulum visible at the bottom. The clock has a white face with black numbers and hands. The sound produced by the clock is the ticking of the pendulum, which is a rhythmic and steady sound, typically heard once per second, as the pendulum swings back and forth, marking the passage of time. The clock hands are also moving, indicating the time as 11:10, which is a time when the clock's minute hand is on the number 11 and the hour hand is on the number 10. The clock is placed against a background that is blurred and not in focus, which puts the emphasis on the clock itself.",
+            "raw": "In the image, there is a large mechanical clock with a pendulum visible at the bottom. The clock has a white face with black numbers and hands. The sound produced by the clock is the ticking of the pendulum, which is a rhythmic and steady sound, typically heard once per second, as the pendulum swings back and forth, marking the passage of time. […] The clock is placed against a background that is blurred and not in focus, which puts the emphasis on the clock itself.",
             "projected": "The image shows a person standing in front of a guitar. The guitar appears to be an acoustic guitar with a visible sound hole and a pickguard. The person is not playing the guitar, so there would be no sound coming from the guitar in this image. The image does not provide any information about the sound the guitar might produce when played or the particular type of sound that could be produced by the guitar.",
         },
         "clap": {
@@ -1776,7 +1468,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
             "projected": "The image shows a person's left hand, which is making a sound. The hand is holding a small, rectangular object with a rounded corner, which appears to be a small bell or chime. The bell is metallic and is being shaken or struck, causing it to produce a ringing sound that is likely metallic and resonant. The sound is likely to be high-pitched due to the size of the bell. The bell is the main object that is sounding in the image.",
         },
         "imagebind": {
-            "raw": "The main object in this image is a guitar, and it is sounding the note E4, which is also known as the musical note \"E.\" The guitar's sound is a clear, distinct ring, with a bright and crisp tone. The guitar appears to be well-maintained, with a glossy finish on the body. The fretboard is visible, and the strings are in good condition, indicating that the guitar is likely to be in good playing condition. The guitar is being played by a person whose hands are partially visible, suggesting that they are likely strumming or picking the strings to produce the E4 note.",
+            "raw": "[…] The guitar's sound is a clear, distinct ring, with a bright and crisp tone. The guitar appears to be well-maintained, with a glossy finish on the body. The fretboard is visible, and the strings are in good condition, indicating that the guitar is likely to be in good playing condition. […]",
             "projected": "In the image provided, there is a person holding a bell. The bell appears to be made of metal, with a smooth, reflective surface. It has a clapper inside, which is the part that strikes the sides of the bell when it's rung, creating the sound. The sound of a bell is typically a resonant, hollow, and sometimes melodic ringing, which is produced when the clapper vibrates against the bell's sides. The sound can vary in tone and volume depending on the size, thickness, and material of the bell, as well as the technique used to strike it.",
         },
     },
@@ -1787,7 +1479,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
         },
         "clap": {
             "raw": "The main object sounding in this image is a bell. The bell appears to be metallic and its surface is smooth with a shiny finish. It has a rounded top and a flat, slightly narrower base that is attached to a clapper, which is the part that actually strikes the bell to produce the sound. The sound produced by the bell is a clear, ringing tone that reverberates and fades as the vibrations from the striking clapper dissipate. The bell's sound is likely to be rich in overtones, which are harmonics that are produced by the bell's shape and material properties, and these overtones give the bell's sound a complex and nuanced timbre.",
-            "projected": "The main object in this image is a clock. The clock has a round face with a series of numerals around the circumference, indicating the hours. It has a white face with black numerals. The clock's hands are black and are pointing to the 12 o'clock position, indicating the time as 12 o'clock. The clock is mounted on a green surface, and there is a small, round, black object to the right of the clock's hands. The object has a hole in the center, suggesting it may be a decorative or functional accessory for the clock, such as a pendulum or a weight. The sound emitted by the clock is likely the ticking of the hands as they move across the face of the clock.",
+            "projected": "The main object in this image is a clock. The clock has a round face with a series of numerals around the circumference, indicating the hours. It has a white face with black numerals. […] The clock is mounted on a green surface, and there is a small, round, black object to the right of the clock's hands. The object has a hole in the center, suggesting it may be a decorative or functional accessory for the clock, such as a pendulum or a weight. The sound emitted by the clock is likely the ticking of the hands as they move across the face of the clock.",
         },
         "wav2clip": {
             "raw": "Based on the image provided, there is no clear object that is producing a sound. The image shows a blurry scene that appears to be taken from a window or a door, which is not a source of sound. If there is a sound that is present in the image, it is not related to a physical object like the one you are describing.",
@@ -1795,7 +1487,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
         },
         "whisper": {
             "raw": "The image shows a mechanical clock, identifiable by its circular shape, hour and minute hands, and Roman numerals on its face. The clock's second hand is making a ticking sound, which is a characteristic, rhythmic sound produced by the swinging motion of the second hand as it moves around the clock face. The ticking sound is often associated with the passage of time and the regular, steady movement of the clock's hands.",
-            "projected": "The main object in the image is a pair of hands playing a piano. The sound produced by this action would be the notes of a piano, which are the individual pitches of the instrument. The piano's sound can vary greatly depending on the skill of the player, the type of music being played, and the condition of the piano itself. In general, the sound of a piano can be described as a rich, resonant, and dynamic musical instrument that can produce a wide range of volume levels and dynamic expression.",
+            "projected": "The main object in the image is a pair of hands playing a piano. The sound produced by this action would be the notes of a piano, which are the individual pitches of the instrument. The piano's sound can vary greatly depending on the skill of the player, the type of music being played, and the condition of the piano itself. […]",
         },
         "imagebind": {
             "raw": "The image shows a close-up of what appears to be a pair of wooden clogs with rope soles, commonly known as \"getas.\" The clogs are traditionally worn in Japan and other parts of East Asia. The sound made by these clogs is a distinct hollow thud when the wearer's foot strikes the ground, due to the hollow design of the clogs, which is quite different from the usual \"slap\" sound of other types of footwear. The hollow thud is both resonant and rhythmic, and it can be heard when the wearer walks on hard surfaces or floors. This sound is characteristic of getas and is often associated with traditional Japanese culture and aesthetics.",
@@ -1852,7 +1544,7 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
                     captionEl.textContent = caption;
                     captionEl.classList.remove('empty');
                 } else {
-                    captionEl.textContent = 'Description not available for this configuration.';
+                    captionEl.textContent = 'No archived caption for this configuration.';
                     captionEl.classList.remove('empty');
                 }
             });
@@ -1872,16 +1564,6 @@ invisible_samples = dataset.filter(<span class="keyword">lambda</span> x: len(x[
             });
         });
 
-        // Animate score bars on load
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                document.querySelectorAll('.score-fill').forEach(bar => {
-                    const width = bar.style.width;
-                    bar.style.width = '0%';
-                    setTimeout(() => { bar.style.width = width; }, 100);
-                });
-            }, 500);
-        });
     </script>
 </body>
 </html>
