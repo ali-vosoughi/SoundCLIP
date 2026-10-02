@@ -23,7 +23,6 @@ This is the official project webpage for "Projected Audio Tokens Gain Retrieval 
 ## 🔗 Quick Links
 - 🌐 **Project Page**: [https://ali-vosoughi.github.io/SoundCLIP/](https://ali-vosoughi.github.io/SoundCLIP/)
 - 📄 **Paper**: [Frozen ICASSP 2027 submission](paper/main.pdf)
-- 📄 **Earlier Version**: 
 - 💻 **Code**: [GitHub Repository](https://github.com/ali-vosoughi/SoundCLIP)
 - 📊 **Dataset**: [AVE-2 on HuggingFace](https://huggingface.co/datasets/ali-vosoughi/ave-2)
 
