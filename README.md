@@ -1,4 +1,4 @@
-# PROJECTED AUDIO TOKENS GAIN RETRIEVAL AND LOSE GROUNDED GENERATION IN MULTIMODAL LLMS
+# Projected Audio Tokens Gain Retrieval and Lose Grounded Generation in Multimodal LLMs
 
 Ali Vosoughi, Jing Bi, Pinxin Liu, Yolo Y. Tang, Chenliang Xu
 
@@ -11,7 +11,7 @@ Preprint; submitted to ICASSP 2027
 📊 **Dataset**: [AVE-2 on HuggingFace](https://huggingface.co/datasets/ali-vosoughi/ave-2)
 
 ## Project Overview
-This is the official project webpage for "PROJECTED AUDIO TOKENS GAIN RETRIEVAL AND LOSE GROUNDED GENERATION IN MULTIMODAL LLMS". SoundCLIP compares raw and projected audio tokens in frozen LLaVA-1.6 with a Mistral-7B language backbone. The study measures audio-to-video retrieval, grounded caption generation, and representation geometry. These comparisons do not identify a causal mechanism.
+This is the official project webpage for "Projected Audio Tokens Gain Retrieval and Lose Grounded Generation in Multimodal LLMs". SoundCLIP compares raw and projected audio tokens in frozen LLaVA-1.6 with a Mistral-7B language backbone. The study measures audio-to-video retrieval, grounded caption generation, and representation geometry. These comparisons do not identify a causal mechanism.
 
 ## Authors
 - **Ali Vosoughi** - University of Rochester ([Website](https://alivosoughi.com/))
@@ -23,7 +23,7 @@ This is the official project webpage for "PROJECTED AUDIO TOKENS GAIN RETRIEVAL 
 ## 🔗 Quick Links
 - 🌐 **Project Page**: [https://ali-vosoughi.github.io/SoundCLIP/](https://ali-vosoughi.github.io/SoundCLIP/)
 - 📄 **Paper**: [Frozen ICASSP 2027 submission](paper/main.pdf)
-- 📄 **Earlier Version**: [ArXiv:2506.10416](https://arxiv.org/abs/2506.10416)
+- 📄 **Earlier Version**: 
 - 💻 **Code**: [GitHub Repository](https://github.com/ali-vosoughi/SoundCLIP)
 - 📊 **Dataset**: [AVE-2 on HuggingFace](https://huggingface.co/datasets/ali-vosoughi/ave-2)
 
@@ -52,7 +52,7 @@ If you use SoundCLIP or the AVE-2 dataset in your research, please cite our pape
 
 ```bibtex
 @unpublished{vosoughi2026soundclip,
-  title={{PROJECTED AUDIO TOKENS GAIN RETRIEVAL AND LOSE GROUNDED GENERATION IN MULTIMODAL LLMS}},
+  title={{Projected Audio Tokens Gain Retrieval and Lose Grounded Generation in Multimodal LLMs}},
   author={Vosoughi, Ali and Bi, Jing and Liu, Pinxin and Tang, Yolo Y. and Xu, Chenliang},
   note={Preprint; submitted to ICASSP 2027},
   year={2026},
