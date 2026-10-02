@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this project page, code or the AVE-2 release, please cite the papers below."
+title: "SoundCLIP project page"
+authors:
+  - family-names: Vosoughi
+    given-names: Ali
+repository-code: "https://github.com/ali-vosoughi/SoundCLIP"
+license: Apache-2.0
+preferred-citation:
+  type: unpublished
+  title: "Projected Audio Tokens Gain Retrieval and Lose Grounded Generation in Multimodal LLMs"
+  authors:
+    - family-names: Vosoughi
+      given-names: Ali
+    - family-names: Bi
+      given-names: Jing
+    - family-names: Liu
+      given-names: Pinxin
+    - family-names: Tang
+      given-names: Yolo Y.
+    - family-names: Xu
+      given-names: Chenliang
+  year: 2026
+  notes: "Preprint; submitted to ICASSP 2027"
